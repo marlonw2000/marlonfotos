@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarlonFotos - Fotografía Profesional</title>
+    <meta name="description" content="Fotografía profesional por Marlon. Retratos, bodas, paisajes y moda. Capturando momentos con arte y pasión.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            background: #000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* HEADER */
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.98);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 25px 0;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled nav ul {
+            padding: 10px 0;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* HERO SECTION WITH ANIMATED TITLE */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
+            color: white;
+            padding-top: 80px;
+            position: relative;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            line-height: 1.1;
+        }
+        
+        .title-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .title-letters {
+            display: inline-block;
+        }
+        
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: letterDrop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        .capital-f {
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .capital-f::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff00de, transparent);
+            bottom: -10px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: lineReveal 1.2s 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .subtitle-text {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 1.8s forwards;
+        }
+        
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s ease 2.3s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.4s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            background: white;
+            color: #000;
+        }
+        
+        /* GALERÍA */
+        #galeria {
+            padding: 120px 5%;
+            background: #000;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #fff;
+            margin: 20px auto 0;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .filters button {
+            background: none;
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            color: #aaa;
+        }
+        
+        .filters button.active,
+        .filters button:hover {
+            color: #fff;
+        }
+        
+        .filters button:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .filters button.active:after,
+        .filters button:hover:after {
+            width: 100%;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .photo-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s;
+            position: relative;
+            cursor: pointer;
+            aspect-ratio: 1/1;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .photo-item:hover .photo-overlay {
+            transform: translateY(0);
+        }
+        
+        .photo-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .photo-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 120px 5%;
+            background: #111;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 120px 5%;
+            background: #000;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .contact-form button {
+            padding: 15px 30px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background: #ddd;
+        }
+        
+        .social-links {
+            margin-top: 60px;
+        }
+        
+        .social-links h3 {
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: #ff00de;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 5%;
+            background: #111;
+            text-align: center;
+        }
+        
+        .footer-text {
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        .back-to-top {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top:hover {
+            color: #ff00de;
+        }
+
+        /* LIGHTBOX/MODAL */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-nav button {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lightbox-nav button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ANIMATIONS */
+        @keyframes letterDrop {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            70% {
+                transform: translateY(5px);
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes lineReveal {
+            0% {
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+            50% {
+                transform: scaleX(1);
+                transform-origin: right;
+            }
+            51% {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+            100% {
+                transform: scaleX(0);
+                transform-origin: left;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes subtleGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255,255,255,0.7);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes zoomOut {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .lightbox-img {
+                max-height: 60vh;
+            }
+            
+            .lightbox-nav button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .about-image, .about-text {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .filters button {
+                padding: 8px 15px;
+                margin: 5px;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú -->
+    <header id="main-header">
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-wrapper">
+                    <span class="title-letters" id="main-title"></span>
+                </span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="subtitle-text">Capturando momentos extraordinarios con arte y pasión</span>
+            </p>
+            <a href="#galeria" class="btn">Explora mi trabajo</a>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria">
+        <h2 class="section-title">Mi Portafolio</h2>
+        <div class="filters">
+            <button class="active" data-filter="all">Todo</button>
+            <button data-filter="retratos">Retratos</button>
+            <button data-filter="bodas">Bodas</button>
+            <button data-filter="paisajes">Paisajes</button>
+            <button data-filter="moda">Moda</button>
+        </div>
+        <div class="gallery-grid">
+            <!-- Retratos -->
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato profesional" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Retrato Profesional</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato artístico" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Retrato Artístico</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato creativo" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Retrato Creativo</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato estudio" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Retrato Estudio</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato iluminación" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Juego de Luces</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Retrato expresivo" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Expresión Pura</div>
+                    <div class="photo-category">Retratos</div>
+                </div>
+            </div>
+            <!-- Bodas -->
+            <div class="photo-item" data-category="bodas">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Boda en la playa" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Boda en la Playa</div>
+                    <div class="photo-category">Bodas</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="bodas">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Primer baile" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Primer Baile</div>
+                    <div class="photo-category">Bodas</div>
+                </div>
+            </div>
+            <!-- Paisajes -->
+            <div class="photo-item" data-category="paisajes">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Montañas al atardecer" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Montañas al Atardecer</div>
+                    <div class="photo-category">Paisajes</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="paisajes">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Bosque nevado" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Bosque Nevado</div>
+                    <div class="photo-category">Paisajes</div>
+                </div>
+            </div>
+            <!-- Moda -->
+            <div class="photo-item" data-category="moda">
+                <img src="https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Moda urbana" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Moda Urbana</div>
+                    <div class="photo-category">Moda</div>
+                </div>
+            </div>
+            <div class="photo-item" data-category="moda">
+                <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Editorial de moda" loading="lazy">
+                <div class="photo-overlay">
+                    <div class="photo-title">Editorial de Moda</div>
+                    <div class="photo-category">Moda</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acerca de -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <h2 class="section-title">Acerca de Mí</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Marlon Fotógrafo">
+                </div>
+                <div class="about-text">
+                    <h3>Mi Pasión por la Fotografía</h3>
+                    <p>Con más de 10 años de experiencia en el mundo de la fotografía, me especializo en capturar la esencia y emoción de cada momento. Mi enfoque artístico y atención al detalle me permiten crear imágenes que cuentan historias.</p>
+                    <p>Cada sesión es una oportunidad para explorar nuevas perspectivas y crear algo único. Trabajo con luz natural y estudio para lograr los mejores resultados adaptados a cada cliente.</p>
+                    <p>Mi objetivo es no solo tomar fotografías, sino crear arte que perdure en el tiempo y evoque emociones genuinas.</p>
+                    <a href="#contacto" class="btn">Contáctame</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact-section">
+        <div class="contact-container">
+            <h2 class="section-title">Contacto</h2>
+            <p style="margin-bottom: 40px; color: #ccc;">¿Listo para crear algo increíble juntos? Contáctame para discutir tu proyecto o para reservar una sesión.</p>
+            
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Teléfono (opcional)">
+                <textarea placeholder="Mensaje" required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+            
+            <div class="social-links">
+                <h3>Sígueme</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="500px"><i class="fab fa-500px"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2023 MarlonFotos. Todos los derechos reservados.</p>
+        <a href="#inicio" class="back-to-top">Volver arriba</a>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption"></div>
+            <div class="lightbox-nav">
+                <button class="lightbox-prev">&#10094;</button>
+                <button class="lightbox-next">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Gallery filter
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filters button');
+            const photoItems = document.querySelectorAll('.photo-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter photos
+                    photoItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page reload
+                    history.pushState(null, null, targetId);
+                });
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.querySelector('.lightbox-img');
+            const lightboxCaption = document.querySelector('.lightbox-caption');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const galleryImages = document.querySelectorAll('.photo-item img');
+            
+            let currentImageIndex = 0;
+            const imagesArray = Array.from(galleryImages);
+            
+            // Open lightbox
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    updateLightbox();
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close lightbox
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Navigation
+            lightboxPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                updateLightbox();
+            });
+            
+            lightboxNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                updateLightbox();
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                    updateLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                    updateLightbox();
+                }
+            });
+            
+            function updateLightbox() {
+                const imgSrc = imagesArray[currentImageIndex].getAttribute('src');
+                const imgAlt = imagesArray[currentImageIndex].getAttribute('alt');
+                const photoTitle = imagesArray[currentImageIndex].parentElement.querySelector('.photo-title').textContent;
+                
+                lightboxImg.setAttribute('src', imgSrc);
+                lightboxImg.setAttribute('alt', imgAlt);
+                lightboxCaption.textContent = photoTitle;
+                
+                // Add animation
+                lightboxImg.style.animation = 'none';
+                setTimeout(() => {
+                    lightboxImg.style.animation = 'zoomIn 0.3s ease';
+                }, 10);
+            }
+
+            // Animated title
+            const title = "MarlonFotos";
+            const titleElement = document.getElementById('main-title');
+            
+            // Create letter spans
+            title.split('').forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.className = 'letter';
+                span.textContent = letter;
+                
+                // Special treatment for capital F
+                if (letter === 'F') {
+                    span.classList.add('capital-f');
+                }
+                
+                // Set animation delay
+                span.style.animationDelay = `${index * 0.1}s`;
+                
+                titleElement.appendChild(span);
+            });
+            
+            // Add subtle glow after animation
+            setTimeout(() => {
+                document.querySelector('.title-wrapper').style.animation = 'subtleGlow 2s ease-in-out infinite alternate';
+            }, 1500);
+            
+            // Typewriter effect for subtitle
+            const subtitle = "Capturando momentos extraordinarios con arte y pasión";
+            const subtitleElement = document.querySelector('.subtitle-text');
+            
+            setTimeout(() => {
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < subtitle.length) {
+                        subtitleElement.textContent = subtitle.substring(0, i+1);
+                        i++;
+                        setTimeout(typeWriter, 30 + Math.random() * 20);
+                    }
+                };
+                typeWriter();
+            }, 1800);
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Gracias por tu mensaje. Me pondré en contacto contigo pronto.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
