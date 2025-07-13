@@ -1101,3 +1101,154 @@
     </script>
 </body>
 </html>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Gallery filter
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filters button');
+            const photoItems = document.querySelectorAll('.photo-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filterValue = this.getAttribute('data-filter');
+                    photoItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        history.pushState(null, null, targetId);
+                    }
+                });
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.querySelector('.lightbox-img');
+            const lightboxCaption = document.querySelector('.lightbox-caption');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const galleryImages = document.querySelectorAll('.photo-item img');
+            let currentImageIndex = 0;
+            const imagesArray = Array.from(galleryImages);
+
+            function updateLightbox() {
+                const img = imagesArray[currentImageIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                const overlay = img.parentElement.querySelector('.photo-overlay');
+                lightboxCaption.textContent = overlay ? overlay.querySelector('.photo-title').textContent : '';
+            }
+
+            // Open lightbox
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    updateLightbox();
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close lightbox
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close when clicking outside image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Navigate lightbox images
+            lightboxPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                updateLightbox();
+            });
+
+            lightboxNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                updateLightbox();
+            });
+
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                        updateLightbox();
+                    } else if (e.key === 'ArrowRight') {
+                        currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                        updateLightbox();
+                    } else if (e.key === 'Escape') {
+                        lightbox.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+
+            // Animated title (hero)
+            const mainTitle = "MarlonFotos";
+            const mainTitleContainer = document.getElementById('main-title');
+            mainTitle.split('').forEach((char, i) => {
+                let span = document.createElement('span');
+                span.className = 'letter';
+                if (char.toLowerCase() === 'f') span.classList.add('capital-f');
+                span.textContent = char;
+                span.style.animationDelay = (i * 0.12) + 's';
+                mainTitleContainer.appendChild(span);
+            });
+
+            // Animate subtitle
+            setTimeout(() => {
+                const subtitle = document.querySelector('.subtitle-text');
+                if (subtitle) subtitle.style.opacity = '1';
+            }, 1800);
+
+            // Contact form handler (prevent page reload)
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
