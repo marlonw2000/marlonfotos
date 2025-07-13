@@ -1252,3 +1252,79 @@
     </script>
 </body>
 </html>
+
+                }
+            });
+
+            // Lightbox navigation
+            function updateLightbox() {
+                const img = imagesArray[currentImageIndex];
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                const overlay = img.parentElement.querySelector('.photo-overlay');
+                if (overlay) {
+                    lightboxCaption.textContent = overlay.querySelector('.photo-title').textContent;
+                } else {
+                    lightboxCaption.textContent = '';
+                }
+            }
+
+            lightboxPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                updateLightbox();
+            });
+
+            lightboxNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                updateLightbox();
+            });
+
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
+                        updateLightbox();
+                    } else if (e.key === 'ArrowRight') {
+                        currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
+                        updateLightbox();
+                    } else if (e.key === 'Escape') {
+                        lightbox.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+
+            // Animated title for hero section
+            const mainTitle = "MarlonFotos";
+            const mainTitleContainer = document.getElementById('main-title');
+            mainTitle.split('').forEach((char, i) => {
+                let span = document.createElement('span');
+                span.className = 'letter';
+                if (char.toLowerCase() === 'f') span.classList.add('capital-f');
+                span.textContent = char;
+                span.style.animationDelay = (i * 0.12) + 's';
+                mainTitleContainer.appendChild(span);
+            });
+
+            // Animate subtitle
+            setTimeout(() => {
+                const subtitle = document.querySelector('.subtitle-text');
+                if (subtitle) subtitle.style.opacity = '1';
+            }, 1800);
+
+            // Contact form handler
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
