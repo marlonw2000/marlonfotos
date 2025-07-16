@@ -83,19 +83,11 @@
         }
 
         .preloader-logo {
-            /* width: 300px; Adjust as needed */
-            /* max-height: 100px; Adjust as needed */
             margin-bottom: 2rem;
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
             color: var(--primary);
         }
-
-        /* .preloader-logo img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        } */
 
         .preloader-bar {
             width: 300px;
@@ -141,25 +133,12 @@
             align-items: center;
         }
 
-        .logo {
-            display: block; /* Make the link a block to contain the image properly */
-            /* width: 200px; Adjust as needed */
-            /* max-height: 60px; Adjust as needed */
-            text-decoration: none;
-        }
-
         .logo-text {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
             color: var(--primary);
             font-weight: bold;
         }
-
-        /* .logo img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        } */
 
         nav ul {
             list-style: none;
@@ -219,26 +198,24 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
         }
 
-        .hero-video {
+        .hero-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -2;
-            opacity: 0.3;
+            z-index: -3;
         }
 
-        .hero-cover {
+        .particles {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            pointer-events: none;
             z-index: -2;
-            opacity: 0.7; /* Adjust opacity as needed */
         }
 
         .hero-content {
@@ -1652,16 +1629,6 @@
         }
 
         /* Particle Effects */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
         .particle {
             position: absolute;
             border-radius: 50%;
@@ -1827,40 +1794,44 @@
             }
         }
 
-        /* Artistic Logo Text */
-        .logo-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Hero Background Image */
-        .hero {
-            background-image: url('https://i.ibb.co/mCyMY8tB/FB-IMG-1752452698442.jpg');
+        /* Image Optimization */
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            font-style: italic;
+            background-repeat: no-repeat;
             background-size: cover;
-            background-position: center;
         }
 
-        .hero-cover {
-            display: none; /* Hide the video/cover overlay */
+        /* Lazy Loading */
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
         }
 
-        /* Scroll Down Arrow on Hero */
-        .hero-content {
-            position: relative;
+        .lazy.loaded {
+            opacity: 1;
         }
 
-        .scroll-down {
-            position: absolute;
-            bottom: -80px; /* Adjust as needed to position below the content */
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--primary);
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-            opacity: 1; /* Make it visible initially */
-            transition: opacity 1s ease 2s;
+        /* Modern Enhancements */
+        .hero-background {
+            filter: blur(0px) brightness(0.7);
+            transition: filter 0.8s ease;
+        }
+
+        .hero:hover .hero-background {
+            filter: blur(3px) brightness(0.6);
+        }
+
+        .service-card, .pricing-card, .team-member, .blog-card {
+            will-change: transform;
+        }
+
+        /* Performance Optimizations */
+        .hero-content, .section-title h2, .section-title p, .section-title .divider,
+        .hero-buttons, .scroll-down {
+            will-change: transform, opacity;
         }
     </style>
 </head>
@@ -1896,6 +1867,7 @@
     </nav>
 
     <section id="home" class="hero">
+        <img src="https://i.ibb.co/mCyMY8tB/FB-IMG-1752452698442.jpg" alt="Hero Background" class="hero-background" loading="eager">
         <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1>Capturando Momentos, Creando Arte</h1>
@@ -1936,7 +1908,7 @@
                 </div>
             </div>
             <div class="about-image floating">
-                <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright fotógrafo" loading="lazy">
+                <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright fotógrafo" loading="lazy" class="lazy">
                 <div class="play-btn pulse">
                     <i class="fas fa-play"></i>
                 </div>
@@ -2017,24 +1989,9 @@
             <button class="filter-btn" data-filter="eventos">Eventos</button>
         </div>
         <div class="portfolio-grid">
+            <!-- Retratos Portfolio Items -->
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato profesional" loading="lazy">
-                <div class="portfolio-overlay">
-                    <h3>Retrato Corporativo</h3>
-                    <p>Sesión profesional para ejecutivo en entorno de oficina</p>
-                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
-                </div>
-            </div>
-            <div class="portfolio-item" data-category="retratos">
-                <img src="https://images.unsplash.com/photo-1517365884913-3c33884b06fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato artístico" loading="lazy">
-                <div class="portfolio-overlay">
-                    <h3>Retrato Artístico</h3>
-                    <p>Concepto creativo con iluminación dramática</p>
-                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
-                </div>
-            </div>
-             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/bgnGFV9N/FB-IMG-1717627047603.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/bgnGFV9N/FB-IMG-1717627047603.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2042,7 +1999,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/YTVPD1r1/FB-IMG-1717627029680.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/YTVPD1r1/FB-IMG-1717627029680.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2050,7 +2007,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/fzjZG3Jv/20220226-170002.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/fzjZG3Jv/20220226-170002.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2058,7 +2015,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/0VB1CVsJ/2014-06-09-10-26-28.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/0VB1CVsJ/2014-06-09-10-26-28.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2066,7 +2023,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/Kpv7PyVS/FB-IMG-1575559648885.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/Kpv7PyVS/FB-IMG-1575559648885.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2074,7 +2031,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/Dfz1L3vQ/FB-IMG-1564835287419.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/Dfz1L3vQ/FB-IMG-1564835287419.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2082,7 +2039,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/XQWZ092/Screenshot-2024-03-20-17-02-53-691-com-flickr-android.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/XQWZ092/Screenshot-2024-03-20-17-02-53-691-com-flickr-android.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2090,7 +2047,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/7NZhHpBv/2025-07-15-11-52-11.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/7NZhHpBv/2025-07-15-11-52-11.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2098,7 +2055,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/23GWVf5M/2025-07-15-06-28-05.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/23GWVf5M/2025-07-15-06-28-05.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2106,7 +2063,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/prdPBSg9/2025-07-15-06-28-08.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/prdPBSg9/2025-07-15-06-28-08.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2114,7 +2071,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/chm59GCK/2025-07-15-06-28-12.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/chm59GCK/2025-07-15-06-28-12.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2122,7 +2079,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/4g8KDHXX/2025-07-15-06-28-18.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/4g8KDHXX/2025-07-15-06-28-18.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2130,7 +2087,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/S70xhn3y/2025-07-15-06-28-22.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/S70xhn3y/2025-07-15-06-28-22.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2138,7 +2095,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/MyzDcbLB/2025-07-15-06-28-55.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/MyzDcbLB/2025-07-15-06-28-55.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2146,7 +2103,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/Q7rD3550/2025-07-15-06-28-52.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/Q7rD3550/2025-07-15-06-28-52.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2154,7 +2111,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/z1Z9h12/2025-07-15-06-28-27.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/z1Z9h12/2025-07-15-06-28-27.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2162,7 +2119,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/Jw9tprLD/2025-07-15-06-28-41.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/Jw9tprLD/2025-07-15-06-28-41.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2170,7 +2127,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/C5hfh80r/2025-07-15-06-29-02.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/C5hfh80r/2025-07-15-06-29-02.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2178,7 +2135,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/LdYCBkDk/2025-07-15-06-29-06.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/LdYCBkDk/2025-07-15-06-29-06.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2186,7 +2143,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/wrN1dpKD/2025-07-15-06-29-14.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/wrN1dpKD/2025-07-15-06-29-14.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2194,7 +2151,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/wh9QwPWF/2025-07-15-06-29-23.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/wh9QwPWF/2025-07-15-06-29-23.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2202,7 +2159,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/mV5bd05Y/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/mV5bd05Y/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2210,7 +2167,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/k2ygbvyN/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/k2ygbvyN/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2218,7 +2175,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/RpCrZDhJ/2025-07-15-06-29-41.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/RpCrZDhJ/2025-07-15-06-29-41.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2226,7 +2183,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/FLzMrs2r/2025-07-15-06-29-51.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/FLzMrs2r/2025-07-15-06-29-51.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2234,7 +2191,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/4wZvsPWc/2025-07-15-06-30-02.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/4wZvsPWc/2025-07-15-06-30-02.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2242,7 +2199,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/6J1Pm1pb/2025-07-15-06-30-07.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/6J1Pm1pb/2025-07-15-06-30-07.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2250,7 +2207,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/SDtLXJJ0/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/SDtLXJJ0/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2258,7 +2215,15 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="retratos">
-                <img src="https://i.ibb.co/JWRFbyS5/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy">
+                <img src="https://i.ibb.co/JWRFbyS5/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy" class="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/bj7NJTdG/FB-IMG-1535143874257.jpg" alt="Retrato" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Retrato</h3>
                     <p>Sesión de retrato profesional</p>
@@ -2266,8 +2231,9 @@
                 </div>
             </div>
 
+            <!-- Other Categories -->
             <div class="portfolio-item" data-category="bodas">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Boda al atardecer" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Boda al atardecer" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Boda en la Playa</h3>
                     <p>Ceremonia íntima al atardecer</p>
@@ -2275,16 +2241,15 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="bodas">
-                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Primer baile" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Primer baile" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Primer Baile</h3>
                     <p>Momento mágico capturado con luz natural</p>
                     <a href="#" class="btn btn-secondary view-image">Ver más</a>
                 </div>
             </div>
-
             <div class="portfolio-item" data-category="paisajes">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Paisaje montañoso" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Paisaje montañoso" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Amanecer en las Montañas</h3>
                     <p>Captura de larga exposición al amanecer</p>
@@ -2292,16 +2257,15 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="paisajes">
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lago al atardecer" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lago al atardecer" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Reflejos en el Lago</h3>
                     <p>Composición simétrica con colores vibrantes</p>
                     <a href="#" class="btn btn-secondary view-image">Ver más</a>
                 </div>
             </div>
-
             <div class="portfolio-item" data-category="comercial">
-                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de producto" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de producto" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Fotografía de Producto</h3>
                     <p>Iluminación profesional para catálogo</p>
@@ -2309,16 +2273,15 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="comercial">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía gastronómica" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía gastronómica" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Gastronomía Profesional</h3>
                     <p>Platillo gourmet capturado para menú</p>
                     <a href="#" class="btn btn-secondary view-image">Ver más</a>
                 </div>
             </div>
-
             <div class="portfolio-item" data-category="eventos">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Concierto en vivo" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Concierto en vivo" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Concierto en Vivo</h3>
                     <p>Captura de la energía del escenario</p>
@@ -2326,7 +2289,7 @@
                 </div>
             </div>
             <div class="portfolio-item" data-category="eventos">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Conferencia corporativa" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Conferencia corporativa" loading="lazy" class="lazy">
                 <div class="portfolio-overlay">
                     <h3>Conferencia Corporativa</h3>
                     <p>Cobertura profesional de evento empresarial</p>
@@ -2349,7 +2312,7 @@
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">
-                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Laura Martínez">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Laura Martínez" loading="lazy" class="lazy">
                     </div>
                     <div class="author-info">
                         <h4>Laura Martínez</h4>
@@ -2370,7 +2333,7 @@
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Rodríguez">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Rodríguez" loading="lazy" class="lazy">
                     </div>
                     <div class="author-info">
                         <h4>Carlos Rodríguez</h4>
@@ -2391,7 +2354,7 @@
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sofía Ramírez">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sofía Ramírez" loading="lazy" class="lazy">
                     </div>
                     <div class="author-info">
                         <h4>Sofía Ramírez</h4>
@@ -2412,7 +2375,7 @@
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Fernández">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Fernández" loading="lazy" class="lazy">
                     </div>
                     <div class="author-info">
                         <h4>David Fernández</h4>
@@ -2497,7 +2460,7 @@
         <div class="team-grid">
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy">
+                    <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy" class="lazy">
                 </div>
                 <h3>Marlon Wright</h3>
                 <p>Fotógrafo Principal</p>
@@ -2510,7 +2473,7 @@
             </div>
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Morales" loading="lazy">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Morales" loading="lazy" class="lazy">
                 </div>
                 <h3>Ana Morales</h3>
                 <p>Asistente de Fotografía</p>
@@ -2523,7 +2486,7 @@
             </div>
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Carlos Gómez" loading="lazy">
+                    <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Carlos Gómez" loading="lazy" class="lazy">
                 </div>
                 <h3>Carlos Gómez</h3>
                 <p>Editor Profesional</p>
@@ -2536,7 +2499,7 @@
             </div>
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://randomuser.me/api/portraits/women/78.jpg" alt="Lucía Pérez" loading="lazy">
+                    <img src="https://randomuser.me/api/portraits/women/78.jpg" alt="Lucía Pérez" loading="lazy" class="lazy">
                 </div>
                 <h3>Lucía Pérez</h3>
                 <p>Coordinadora de Eventos</p>
@@ -2559,7 +2522,7 @@
         <div class="blog-grid">
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de retrato" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de retrato" loading="lazy" class="lazy">
                     <div class="blog-date">15 JUL 2025</div>
                 </div>
                 <div class="blog-content">
@@ -2568,7 +2531,7 @@
                     <p>Explora técnicas profesionales para crear retratos que revelen la personalidad y emociones de tus sujetos, más allá de una simple fotografía.</p>
                     <div class="blog-author">
                         <div class="author-image">
-                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy" class="lazy">
                         </div>
                         <div class="author-details">
                             <h4>Marlon Wright</h4>
@@ -2579,7 +2542,7 @@
             </div>
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de paisaje" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de paisaje" loading="lazy" class="lazy">
                     <div class="blog-date">10 JUL 2025</div>
                 </div>
                 <div class="blog-content">
@@ -2588,7 +2551,7 @@
                     <p>Guía completa para capturar la magia de la hora dorada, desde configuración de cámara hasta técnicas de composición avanzadas.</p>
                     <div class="blog-author">
                         <div class="author-image">
-                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy" class="lazy">
                         </div>
                         <div class="author-details">
                             <h4>Marlon Wright</h4>
@@ -2599,7 +2562,7 @@
             </div>
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de boda" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de boda" loading="lazy" class="lazy">
                     <div class="blog-date">5 JUL 2025</div>
                 </div>
                 <div class="blog-content">
@@ -2608,7 +2571,7 @@
                     <p>Descubre los momentos emocionales clave que hacen que los álbumes de bodas sean verdaderamente memorables y cómo anticiparte a ellos.</p>
                     <div class="blog-author">
                         <div class="author-image">
-                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy" class="lazy">
                         </div>
                         <div class="author-details">
                             <h4>Marlon Wright</h4>
@@ -3334,6 +3297,28 @@
                 emailInput.value = '';
             });
         }
+
+        // Lazy Loading Images
+        const lazyImages = document.querySelectorAll('.lazy');
+        
+        const lazyLoad = function() {
+            lazyImages.forEach(img => {
+                if (img.getBoundingClientRect().top < window.innerHeight + 100 && 
+                    img.getBoundingClientRect().bottom > 0 && 
+                    getComputedStyle(img).display !== 'none') {
+                    img.src = img.dataset.src || img.src;
+                    img.classList.add('loaded');
+                }
+            });
+        };
+
+        // Initial load
+        lazyLoad();
+
+        // Load images on scroll
+        document.addEventListener('scroll', lazyLoad);
+        window.addEventListener('resize', lazyLoad);
+        window.addEventListener('orientationchange', lazyLoad);
 
         // Create particles on load
         window.addEventListener('load', createParticles);
