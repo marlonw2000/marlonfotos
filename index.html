@@ -3,93 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marlon Wright ofrece fotografía profesional en retratos, paisajes, bodas y parejas. Reserva tu sesión o inscríbete en nuestros cursos.">
+    <meta name="keywords" content="fotografía, retratos, paisajes, bodas, parejas, Marlon Wright, Costa Rica, cursos de fotografía">
+    <meta name="author" content="Marlon Wright">
+    <meta property="og:title" content="MarlonFotos - Fotografía Profesional">
+    <meta property="og:description" content="Capturamos momentos únicos con arte y técnica profesional. Explora nuestras galerías y servicios.">
+    <meta property="og:image" content="https://i.ibb.co/DHtFXhtM/Logo.png">
+    <meta property="og:url" content="https://marlonfotos.com">
     <title>MarlonFotos - Fotografía Profesional</title>
-    <meta name="description" content="Fotografía profesional por Marlon. Retratos, bodas, paisajes y moda. Capturando momentos con arte y pasión.">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/6C63FF/camera.png">
     <style>
-        /* RESET & BASE */
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4D44DB;
+            --accent: #FF6584;
+            --light: #FFFFFF;
+            --light-gray: #F7FAFC;
+            --medium-gray: #E2E8F0;
+            --text: #4A5568;
+            --text-light: #718096;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --glass: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            color: #fff;
-            background: #000;
-            line-height: 1.6;
+            background: var(--light-gray);
+            color: var(--text);
+            line-height: 1.8;
             overflow-x: hidden;
+            transition: var(--transition);
         }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            color: #fff;
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
-        
-        img {
-            max-width: 100%;
-            height: auto;
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
         }
-        
-        /* HEADER */
-        header {
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Preloader */
+        .preloader {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-        
-        header.scrolled {
-            padding: 10px 0;
-            background: rgba(0, 0, 0, 0.98);
-        }
-        
-        nav ul {
+            height: 100%;
+            background: var(--light);
             display: flex;
             justify-content: center;
-            list-style: none;
-            padding: 25px 0;
-            transition: all 0.3s;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
         }
-        
-        header.scrolled nav ul {
-            padding: 10px 0;
+
+        .preloader-logo {
+            /* width: 300px; Adjust as needed */
+            /* max-height: 100px; Adjust as needed */
+            margin-bottom: 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
         }
-        
-        nav ul li {
-            margin: 0 20px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+
+        /* .preloader-logo img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        } */
+
+        .preloader-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
             position: relative;
         }
-        
-        nav ul li a:after {
+
+        .preloader-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            background: var(--light);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: block; /* Make the link a block to contain the image properly */
+            /* width: 200px; Adjust as needed */
+            /* max-height: 60px; Adjust as needed */
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* .logo img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        } */
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
             content: '';
             position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: #fff;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
+            background: var(--accent);
+            transition: var(--transition);
         }
-        
-        nav ul li a:hover:after {
-            width: 100%;
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent);
         }
-        
-        /* HERO SECTION WITH ANIMATED TITLE */
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 80%;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -97,1604 +214,3129 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: url('https://i.ibb.co/mCyMY8tB/FB-IMG-1752452698442.jpg') center/cover;
-            color: white;
-            padding-top: 80px;
             position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
         }
-        
-        .hero:before {
-            content: '';
+
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            padding: 0 20px;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            line-height: 1.1;
-        }
-        
-        .title-wrapper {
-            display: inline-block;
-            position: relative;
-        }
-        
-        .title-letters {
-            display: inline-block;
-        }
-        
-        .letter {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: letterDrop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        
-        .capital-f {
-            color: #fff;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .capital-f::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ff00de, transparent);
-            bottom: -10px;
-            left: 0;
-            transform: scaleX(0);
-            transform-origin: right;
-            animation: lineReveal 1.2s 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .subtitle-text {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease 1.8s forwards;
-        }
-        
-        /* Button styles */
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            opacity: 0;
-            animation: fadeIn 1s ease 2.3s forwards;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.1);
-            transition: all 0.4s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:hover {
-            background: white;
-            color: #000;
-        }
-        
-        .whatsapp-btn {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
-        
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        /* GALERÍA */
-        #galeria {
-            padding: 120px 5%;
-            background: #000;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: #fff;
-            margin: 20px auto 0;
-        }
-        
-        .filters {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .filters button {
-            background: none;
-            border: none;
-            padding: 12px 25px;
-            margin: 0 10px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            position: relative;
-            color: #aaa;
-        }
-        
-        .filters button.active,
-        .filters button:hover {
-            color: #fff;
-        }
-        
-        .filters button:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #fff;
-            bottom: 0;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        .filters button.active:after,
-        .filters button:hover:after {
-            width: 100%;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .photo-item {
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-            transition: all 0.4s;
-            position: relative;
-            cursor: pointer;
-            aspect-ratio: 1/1;
-        }
-        
-        .photo-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
-        }
-        
-        .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .photo-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .photo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            color: white;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-        
-        .photo-item:hover .photo-overlay {
-            transform: translateY(0);
-        }
-        
-        .photo-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .photo-category {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            z-index: -2;
+            opacity: 0.3;
         }
 
-        /* ABOUT SECTION */
-        .about-section {
-            padding: 120px 5%;
-            background: #111;
+        .hero-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.7; /* Adjust opacity as needed */
         }
-        
-        .about-container {
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--text);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            background: #e00063;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            transition: opacity 1s ease 2s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 1.5rem auto;
+            border-radius: 2px;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: center;
+        }
+
+        /* About Section */
+        .about-content {
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .about-content {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
             align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
         }
-        
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
         .about-image {
-            flex: 1;
-            min-width: 300px;
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(15deg);
+            transition: var(--transition);
         }
-        
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(5deg);
+        }
+
         .about-image img {
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            color: #ccc;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
         }
 
-        /* BLOG SECTION */
-        .blog-section {
-            padding: 120px 5%;
-            background: #000;
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        
-        .blog-container {
+
+        .play-btn i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-left: 5px;
+        }
+
+        .play-btn:hover {
+            background: var(--accent);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
+        .service-card {
+            background: var(--light);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(255, 101, 132, 0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--light);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .service-link i {
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            color: var(--accent);
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Portfolio Section */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--medium-gray);
+            color: var(--text);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 101, 132, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(108, 99, 255, 0.8), rgba(77, 68, 219, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            transform: translateY(20px);
+            transition: var(--transition);
+            transition-delay: 0.1s;
+        }
+
+        .portfolio-overlay .btn {
+            transform: translateY(20px);
+            transition: var(--transition);
+            transition-delay: 0.2s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p,
+        .portfolio-item:hover .portfolio-overlay .btn {
+            transform: translateY(0);
+        }
+
+        /* Testimonials Section */
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin: 0 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .testimonial-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .testimonial-quote::before,
+        .testimonial-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-quote::before {
+            top: -1.5rem;
+            left: -1rem;
+        }
+
+        .testimonial-quote::after {
+            bottom: -2.5rem;
+            right: -1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            border: 3px solid var(--primary);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            color: var(--accent);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .slick-dots {
+            bottom: -50px;
+        }
+
+        .slick-dots li button:before {
+            color: var(--primary);
+            opacity: 0.5;
+            font-size: 10px;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--light);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            transform: translateY(-20px);
+        }
+
+        .pricing-card.popular::before {
+            content: 'Popular';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--light);
+            padding: 0.3rem 3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .pricing-features li i {
+            color: var(--primary);
+            margin-right: 0.7rem;
+            font-size: 0.8rem;
+        }
+
+        .pricing-card-footer {
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card.popular:hover {
+            transform: translateY(-30px);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .team-member:hover::before {
+            opacity: 1;
+        }
+
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 3px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image {
+            border-color: var(--primary);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .team-member h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .member-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .member-social a:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+
+        /* Blog Section */
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
+
         .blog-card {
-            background: #111;
-            border-radius: 8px;
+            background: var(--light);
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(255,255,255,0.05);
-            transition: all 0.3s;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
         }
-        
+
         .blog-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-hover);
         }
-        
+
         .blog-image {
-            height: 250px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
-        
+
         .blog-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .blog-card:hover .blog-image img {
-            transform: scale(1.05);
-        }
-        
-        .blog-content {
-            padding: 25px;
-        }
-        
-        .blog-date {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .blog-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        
-        .blog-excerpt {
-            color: #ccc;
-            margin-bottom: 20px;
-        }
-        
-        .read-more {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .read-more:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #fff;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        .read-more:hover:after {
-            width: 100%;
-        }
-        
-        /* BLOG ARTICLE */
-        .article-section {
-            padding: 100px 5% 120px;
-            background: #000;
-        }
-        
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .article-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .article-date {
-            color: #aaa;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .article-title {
-            font-size: 2.5rem;
-            line-height: 1.3;
-            margin-bottom: 20px;
-        }
-        
-        .article-image {
-            margin: 40px 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-        }
-        
-        .article-image img {
-            width: 100%;
-            display: block;
-        }
-        
-        .article-content {
-            color: #ccc;
-            line-height: 1.8;
-        }
-        
-        .article-content p {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-        
-        .article-content h3 {
-            margin: 40px 0 20px;
-            color: #fff;
-            font-size: 1.8rem;
-        }
-        
-        .article-content blockquote {
-            border-left: 3px solid #ff00de;
-            padding-left: 20px;
-            margin: 30px 0;
-            font-style: italic;
-            color: #fff;
-            font-size: 1.2rem;
-        }
-        
-        .back-to-blog {
-            display: inline-block;
-            margin-top: 50px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-        }
-        
-        .back-to-blog:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #fff;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        .back-to-blog:hover:after {
-            width: 100%;
+            transition: var(--transition);
         }
 
-        /* CONTACT SECTION */
-        .contact-section {
-            padding: 120px 5%;
-            background: #000;
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
         }
-        
+
+        .blog-date {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: var(--accent);
+            color: var(--light);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .author-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-details h4 {
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-details p {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+
+        /* Contact Section */
         .contact-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
-        }
-        
-        .contact-form {
             display: grid;
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: var(--light);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p, .info-content a {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .info-content a:hover {
+            color: var(--primary);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .contact-social a:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            border-radius: var(--radius);
+            color: var(--light);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .form-submit:hover {
+            background: linear-gradient(to right, #5d55e6, #4339c7);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .contact-map {
+            height: 300px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 3rem;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
             max-width: 500px;
             margin: 0 auto;
+            display: flex;
+            background: var(--light);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .contact-form input,
-        .contact-form textarea {
-            padding: 15px;
-            background: #111;
-            border: 1px solid #333;
-            color: #fff;
-            border-radius: 4px;
-            width: 100%;
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            outline: none;
+            font-size: 1rem;
         }
-        
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        .contact-form button {
-            padding: 15px 30px;
-            background: #fff;
-            color: #000;
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--light);
             border: none;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
-        
-        .contact-form button:hover {
-            background: #ddd;
+
+        .newsletter-btn:hover {
+            background: #e00063;
         }
-        
-        .social-links {
-            margin-top: 60px;
+
+        /* Footer */
+        .footer {
+            background: var(--light);
+            padding: 5rem 0 2rem;
+            position: relative;
+            border-top: 1px solid var(--medium-gray);
         }
-        
-        .social-links h3 {
-            margin-bottom: 20px;
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
         }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .social-icons a {
-            color: #fff;
+
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            transform: translateY(-5px);
-            color: #ff00de;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
         }
 
-        /* FOOTER */
-        footer {
-            padding: 40px 5%;
-            background: #111;
-            text-align: center;
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
         }
-        
-        .footer-text {
-            color: #777;
-            margin-bottom: 20px;
+
+        .footer-col p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
-        
-        .back-to-top {
-            color: #fff;
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
             text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .back-to-top:hover {
-            color: #ff00de;
+            transition: var(--transition);
+            display: inline-block;
         }
 
-        /* LIGHTBOX/MODAL */
-        .lightbox {
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .footer-bottom p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 101, 132, 0.3);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #e00063;
+            transform: translateY(-5px);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-float:hover {
+            background: #1a9c4d;
+            transform: translateY(-5px);
+        }
+
+        /* Modal */
+        .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 9999;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            visibility: hidden;
+            transition: var(--transition);
         }
-        
-        .lightbox.active {
+
+        .modal.active {
             opacity: 1;
-            pointer-events: all;
+            visibility: visible;
         }
-        
-        .lightbox-content {
+
+        .modal-content {
             position: relative;
             max-width: 90%;
             max-height: 90%;
-            animation: zoomIn 0.3s ease;
         }
-        
-        .lightbox-img {
+
+        .modal-content img {
             max-width: 100%;
             max-height: 80vh;
             display: block;
-            border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border-radius: var(--radius);
         }
-        
-        .lightbox-close {
+
+        .modal-close {
             position: absolute;
             top: -40px;
             right: 0;
-            color: #fff;
+            color: var(--light);
             font-size: 2rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
-        
-        .lightbox-close:hover {
-            transform: rotate(90deg);
+
+        .modal-close:hover {
+            color: var(--accent);
         }
-        
-        .lightbox-caption {
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            color: #fff;
-            text-align: center;
-            width: 100%;
-            padding: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .lightbox-nav {
+
+        .modal-nav {
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
+            padding: 0 2rem;
         }
-        
-        .lightbox-nav button {
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
+
+        .modal-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--light);
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .lightbox-nav button:hover {
-            background: rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
         }
 
-        /* PARTICLES BACKGROUND */
-        #particles-js {
-            position: fixed;
+        .modal-nav button:hover {
+            background: var(--accent);
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .modal-thumbnail.active, .modal-thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .modal-thumbnail img {
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.3;
+            object-fit: cover;
         }
 
-        /* ANIMATIONS */
-        @keyframes letterDrop {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            70% {
-                transform: translateY(5px);
-            }
-            100% {
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
                 transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes lineReveal {
-            0% {
-                transform: scaleX(0);
-                transform-origin: right;
             }
             50% {
-                transform: scaleX(1);
-                transform-origin: right;
-            }
-            51% {
-                transform: scaleX(1);
-                transform-origin: left;
-            }
-            100% {
-                transform: scaleX(0);
-                transform-origin: left;
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes subtleGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(255,255,255,0.3);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(255,255,255,0.7);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes zoomOut {
-            from {
-                transform: scale(1);
-                opacity: 1;
-            }
-            to {
-                transform: scale(0.8);
-                opacity: 0;
+                transform: translateY(-20px);
             }
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3.5rem;
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
             }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .gallery-grid, .blog-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                padding: 15px 0;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .lightbox-img {
-                max-height: 60vh;
-            }
-            
-            .lightbox-nav button {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .about-image, .about-text {
-                min-width: 100%;
-            }
-            
-            .article-title {
-                font-size: 2rem;
+            50% {
+                transform: scale(1.05);
             }
         }
-        
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.5rem;
+
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: -100px; }
+            100% { background-position: 200px; }
+        }
+
+        .shine {
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% auto;
+            animation: shine 2s linear infinite;
+        }
+
+        /* Particle Effects */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.2;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.2;
             }
-            
-            .hero-subtitle {
-                font-size: 1rem;
+            50% {
+                opacity: 0.4;
             }
-            
-            .section-title {
-                font-size: 2rem;
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0.2;
             }
-            
-            .filters button {
-                padding: 8px 15px;
-                margin: 5px;
-                font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
             }
-            
-            .gallery-grid, .blog-grid {
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
                 grid-template-columns: 1fr;
             }
-            
-            .article-title {
+
+            .about-image {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--light);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title p {
+                font-size: 1rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-links a:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 5rem 1rem;
+            }
+
+            .section-title h2 {
                 font-size: 1.8rem;
             }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: var(--radius);
+            }
+
+            .newsletter-input, .newsletter-btn {
+                border-radius: 0;
+            }
+
+            .newsletter-btn {
+                border-bottom-left-radius: var(--radius);
+                border-bottom-right-radius: var(--radius);
+            }
+        }
+
+        /* Artistic Logo Text */
+        .logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Hero Background Image */
+        .hero {
+            background-image: url('https://i.ibb.co/mCyMY8tB/FB-IMG-1752452698442.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-cover {
+            display: none; /* Hide the video/cover overlay */
+        }
+
+        /* Scroll Down Arrow on Hero */
+        .hero-content {
+            position: relative;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: -80px; /* Adjust as needed to position below the content */
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            opacity: 1; /* Make it visible initially */
+            transition: opacity 1s ease 2s;
         }
     </style>
 </head>
 <body>
-    <!-- Menú -->
-    <header id="main-header">
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#about">Acerca de</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">
+            MarlonFotos
+        </div>
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="title-wrapper">
-                    <span class="title-letters" id="main-title"></span>
-                </span>
-            </h1>
-            <p class="hero-subtitle">
-                <span class="subtitle-text">Capturando momentos extraordinarios con arte y pasión</span>
-            </p>
-            <a href="#galeria" class="btn">Explora mi trabajo</a>
-            <a href="https://wa.me/50672027559?text=Hola%20Marlon,%20estoy%20interesado%20en%20tu%20trabajo%20fotográfico" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Contáctame por WhatsApp
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <span class="logo-text">MarlonFotos</span>
             </a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#home" class="nav-link active">Inicio</a></li>
+                <li><a href="#about" class="nav-link">Sobre mí</a></li>
+                <li><a href="#services" class="nav-link">Servicios</a></li>
+                <li><a href="#portfolio" class="nav-link">Portafolio</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonios</a></li>
+                <li><a href="#pricing" class="nav-link">Precios</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>Capturando Momentos, Creando Arte</h1>
+            <p>Fotografía profesional que cuenta historias a través de imágenes impactantes</p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn btn-primary">Ver Portafolio</a>
+                <a href="#contact" class="btn btn-secondary">Contactar</a>
+            </div>
+            <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
         </div>
     </section>
 
-    <!-- Galería -->
-    <section id="galeria">
-        <h2 class="section-title">Mi Portafolio</h2>
-        <div class="filters">
-            <button class="active" data-filter="all">Todo</button>
-            <button data-filter="retratos">Retratos</button>
-            <button data-filter="bodas">Bodas</button>
-            <button data-filter="paisajes">Paisajes</button>
-            <button data-filter="moda">Moda</button>
+    <section id="about" class="section">
+        <div class="section-title">
+            <h2>Sobre Mí</h2>
+            <p>Conoce al artista detrás de la lente y descubre mi pasión por capturar momentos únicos</p>
+            <div class="divider"></div>
         </div>
-        <div class="gallery-grid">
-            <!-- Retratos -->
-            <div class="photo-item" data-category="retratos">
-                <img src="https://i.ibb.co/3X7HmMv/FB-IMG-1752452846370.jpg" alt="Retrato profesional" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Retrato Profesional</div>
-                    <div class="photo-category">Retratos</div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Hola, soy Marlon Wright</h3>
+                <p>Con más de 15 años de experiencia en el mundo de la fotografía, he tenido el privilegio de capturar momentos especiales para cientos de clientes satisfechos. Mi enfoque combina técnica profesional con una sensibilidad artística única.</p>
+                <p>Cada sesión fotográfica es una oportunidad para crear algo extraordinario. Ya sea un retrato íntimo, un paisaje impresionante o el día más importante de tu vida, me comprometo a entregar imágenes que superen tus expectativas.</p>
+                <p>Mi filosofía se basa en la conexión humana y la búsqueda de la belleza en lo cotidiano. Creo que las mejores fotos son aquellas que cuentan una historia y evocan emociones genuinas.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-text">Años de Experiencia</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-text">Clientes Satisfechos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-text">Fotos Capturadas</div>
+                    </div>
                 </div>
             </div>
-            <div class="photo-item" data-category="retratos">
-                <img src="https://i.ibb.co/vCwhftyV/FB-IMG-1752452828682.jpg" alt="Retrato artístico" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Retrato Artístico</div>
-                    <div class="photo-category">Retratos</div>
-                </div>
-            </div>
-            <div class="photo-item" data-category="retratos">
-                <img src="https://i.ibb.co/gbq51rgq/FB-IMG-1752452804003.jpg" alt="Retrato creativo" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Retrato Creativo</div>
-                    <div class="photo-category">Retratos</div>
-                </div>
-            </div>
-            <div class="photo-item" data-category="retratos">
-                <img src="https://i.ibb.co/QjvYPqF6/FB-IMG-1752452789729.jpg" alt="Retrato estudio" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Retrato Estudio</div>
-                    <div class="photo-category">Retratos</div>
-                </div>
-            </div>
-            <!-- Bodas -->
-            <div class="photo-item" data-category="bodas">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Boda en la playa" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Boda en la Playa</div>
-                    <div class="photo-category">Bodas</div>
-                </div>
-            </div>
-            <div class="photo-item" data-category="bodas">
-                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Primer baile" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Primer Baile</div>
-                    <div class="photo-category">Bodas</div>
-                </div>
-            </div>
-            <!-- Paisajes -->
-            <div class="photo-item" data-category="paisajes">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Montañas al atardecer" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Montañas al Atardecer</div>
-                    <div class="photo-category">Paisajes</div>
-                </div>
-            </div>
-            <div class="photo-item" data-category="paisajes">
-                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Bosque nevado" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Bosque Nevado</div>
-                    <div class="photo-category">Paisajes</div>
-                </div>
-            </div>
-            <!-- Moda -->
-            <div class="photo-item" data-category="moda">
-                <img src="https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Moda urbana" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Moda Urbana</div>
-                    <div class="photo-category">Moda</div>
-                </div>
-            </div>
-            <div class="photo-item" data-category="moda">
-                <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Editorial de moda" loading="lazy">
-                <div class="photo-overlay">
-                    <div class="photo-title">Editorial de Moda</div>
-                    <div class="photo-category">Moda</div>
+            <div class="about-image floating">
+                <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright fotógrafo" loading="lazy">
+                <div class="play-btn pulse">
+                    <i class="fas fa-play"></i>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="blog-section">
-        <h2 class="section-title">El Arte de la Fotografía</h2>
-        <p style="text-align: center; margin-bottom: 60px; color: #ccc; max-width: 800px; margin-left: auto; margin-right: auto;">
-            Explora mis pensamientos sobre la belleza de capturar momentos, técnicas fotográficas y la importancia de preservar recuerdos con calidad.
-        </p>
-        
-        <div class="blog-container">
-            <div class="blog-grid">
-                <!-- Blog Post 1 -->
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="La magia de capturar momentos" loading="lazy">
+    <section id="services" class="section">
+        <div class="section-title">
+            <h2>Mis Servicios</h2>
+            <p>Ofrezco una variedad de servicios fotográficos profesionales adaptados a tus necesidades</p>
+            <div class="divider"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-portrait"></i>
+                </div>
+                <h3>Retratos Profesionales</h3>
+                <p>Sesiones personalizadas que capturan tu esencia y personalidad, perfectas para perfiles profesionales, redes sociales o recuerdos familiares.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Fotografía de Bodas</h3>
+                <p>Cobertura completa de tu día especial, capturando cada momento emotivo y detalle significativo con estilo fotoperiodístico y artístico.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>Fotografía de Paisajes</h3>
+                <p>Impresionantes imágenes de naturaleza y entornos urbanos que capturan la belleza y atmósfera única de cada lugar.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Fotografía Comercial</h3>
+                <p>Imágenes profesionales para negocios, productos y marcas que destacan tus ofertas y refuerzan tu identidad visual.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Fotografía de Eventos</h3>
+                <p>Cobertura profesional de conferencias, fiestas, conciertos y otros eventos especiales, capturando la energía y momentos clave.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Talleres de Fotografía</h3>
+                <p>Aprende técnicas profesionales de fotografía y edición en mis talleres prácticos diseñados para todos los niveles.</p>
+                <a href="#contact" class="service-link">Saber más <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section">
+        <div class="section-title">
+            <h2>Mi Portafolio</h2>
+            <p>Una selección de mis trabajos más recientes y representativos</p>
+            <div class="divider"></div>
+        </div>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">Todo</button>
+            <button class="filter-btn" data-filter="retratos">Retratos</button>
+            <button class="filter-btn" data-filter="bodas">Bodas</button>
+            <button class="filter-btn" data-filter="paisajes">Paisajes</button>
+            <button class="filter-btn" data-filter="comercial">Comercial</button>
+            <button class="filter-btn" data-filter="eventos">Eventos</button>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato profesional" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato Corporativo</h3>
+                    <p>Sesión profesional para ejecutivo en entorno de oficina</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://images.unsplash.com/photo-1517365884913-3c33884b06fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Retrato artístico" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato Artístico</h3>
+                    <p>Concepto creativo con iluminación dramática</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+             <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/bgnGFV9N/FB-IMG-1717627047603.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/YTVPD1r1/FB-IMG-1717627029680.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/fzjZG3Jv/20220226-170002.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/0VB1CVsJ/2014-06-09-10-26-28.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/Kpv7PyVS/FB-IMG-1575559648885.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/Dfz1L3vQ/FB-IMG-1564835287419.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/XQWZ092/Screenshot-2024-03-20-17-02-53-691-com-flickr-android.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/7NZhHpBv/2025-07-15-11-52-11.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/23GWVf5M/2025-07-15-06-28-05.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/prdPBSg9/2025-07-15-06-28-08.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/chm59GCK/2025-07-15-06-28-12.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/4g8KDHXX/2025-07-15-06-28-18.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/S70xhn3y/2025-07-15-06-28-22.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/MyzDcbLB/2025-07-15-06-28-55.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/Q7rD3550/2025-07-15-06-28-52.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/z1Z9h12/2025-07-15-06-28-27.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/Jw9tprLD/2025-07-15-06-28-41.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/C5hfh80r/2025-07-15-06-29-02.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/LdYCBkDk/2025-07-15-06-29-06.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/wrN1dpKD/2025-07-15-06-29-14.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/wh9QwPWF/2025-07-15-06-29-23.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/mV5bd05Y/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/k2ygbvyN/2025-07-15-06-29-38.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/RpCrZDhJ/2025-07-15-06-29-41.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/FLzMrs2r/2025-07-15-06-29-51.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/4wZvsPWc/2025-07-15-06-30-02.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/6J1Pm1pb/2025-07-15-06-30-07.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/SDtLXJJ0/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="retratos">
+                <img src="https://i.ibb.co/JWRFbyS5/2025-07-15-06-30-14.jpg" alt="Retrato" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Retrato</h3>
+                    <p>Sesión de retrato profesional</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="bodas">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Boda al atardecer" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Boda en la Playa</h3>
+                    <p>Ceremonia íntima al atardecer</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="bodas">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Primer baile" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Primer Baile</h3>
+                    <p>Momento mágico capturado con luz natural</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="paisajes">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Paisaje montañoso" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Amanecer en las Montañas</h3>
+                    <p>Captura de larga exposición al amanecer</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="paisajes">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lago al atardecer" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Reflejos en el Lago</h3>
+                    <p>Composición simétrica con colores vibrantes</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="comercial">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de producto" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Fotografía de Producto</h3>
+                    <p>Iluminación profesional para catálogo</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="comercial">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía gastronómica" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Gastronomía Profesional</h3>
+                    <p>Platillo gourmet capturado para menú</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="eventos">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Concierto en vivo" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Concierto en Vivo</h3>
+                    <p>Captura de la energía del escenario</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="eventos">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Conferencia corporativa" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Conferencia Corporativa</h3>
+                    <p>Cobertura profesional de evento empresarial</p>
+                    <a href="#" class="btn btn-secondary view-image">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section">
+        <div class="section-title">
+            <h2>Testimonios</h2>
+            <p>Lo que mis clientes dicen sobre mi trabajo</p>
+            <div class="divider"></div>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-slide">
+                <div class="testimonial-quote">
+                    "Marlon capturó nuestra boda de manera increíble. Cada foto es un tesoro que revive las emociones de ese día especial. Su atención al detalle y capacidad para capturar momentos espontáneos es simplemente asombrosa."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Laura Martínez">
                     </div>
-                    <div class="blog-content">
-                        <span class="blog-date">15 de Junio, 2023</span>
-                        <h3 class="blog-title">La Magia de Capturar Momentos Efímeros</h3>
-                        <p class="blog-excerpt">Explorando cómo la fotografía nos permite detener el tiempo y preservar emociones que de otra manera se perderían en el flujo constante de la vida...</p>
-                        <a href="#blog-article-1" class="read-more">Leer más</a>
+                    <div class="author-info">
+                        <h4>Laura Martínez</h4>
+                        <p>Boda en la Playa</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Blog Post 2 -->
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Por qué la calidad importa" loading="lazy">
+            </div>
+            <div class="testimonial-slide">
+                <div class="testimonial-quote">
+                    "Las fotos corporativas que Marlon tomó para nuestro equipo ejecutivo han elevado profesionalmente nuestra imagen de marca. Su capacidad para hacer que todos se sintieran cómodos frente a la cámara es notable."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Rodríguez">
                     </div>
-                    <div class="blog-content">
-                        <span class="blog-date">2 de Mayo, 2023</span>
-                        <h3 class="blog-title">Por Qué la Calidad en la Fotografía es Fundamental</h3>
-                        <p class="blog-excerpt">En un mundo saturado de imágenes digitales, la verdadera calidad fotográfica se ha convertido en un arte que trasciende el tiempo...</p>
-                        <a href="#blog-article-2" class="read-more">Leer más</a>
+                    <div class="author-info">
+                        <h4>Carlos Rodríguez</h4>
+                        <p>CEO, TechSolutions</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Blog Post 3 -->
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Técnicas de iluminación" loading="lazy">
+            </div>
+            <div class="testimonial-slide">
+                <div class="testimonial-quote">
+                    "Como influencer, necesito fotos que destaquen entre la multitud. Marlon tiene un ojo único para la composición y la iluminación. Mis fotos de perfil ahora reciben el doble de engagement gracias a su trabajo."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sofía Ramírez">
                     </div>
-                    <div class="blog-content">
-                        <span class="blog-date">18 de Abril, 2023</span>
-                        <h3 class="blog-title">Dominando la Luz: Técnicas Profesionales de Iluminación</h3>
-                        <p class="blog-excerpt">La luz es el pincel del fotógrafo. Aprende cómo los profesionales manipulan la luz natural y artificial para crear imágenes impactantes...</p>
-                        <a href="#blog-article-3" class="read-more">Leer más</a>
+                    <div class="author-info">
+                        <h4>Sofía Ramírez</h4>
+                        <p>Influencer Digital</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <div class="testimonial-quote">
+                    "Contraté a Marlon para fotografiar nuestro producto estrella y los resultados superaron todas nuestras expectativas. Las imágenes aumentaron nuestras conversiones en un 30%. Definitivamente volveremos a trabajar con él."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Fernández">
+                    </div>
+                    <div class="author-info">
+                        <h4>David Fernández</h4>
+                        <p>Director de Marketing</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Article 1 -->
-    <div id="blog-article-1" class="article-section" style="display: none;">
-        <div class="article-container">
-            <div class="article-header">
-                <span class="article-date">15 de Junio, 2023</span>
-                <h1 class="article-title">La Magia de Capturar Momentos Efímeros</h1>
-            </div>
-            
-            <div class="article-image">
-                <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="La magia de capturar momentos" loading="lazy">
-            </div>
-            
-            <div class="article-content">
-                <p>La fotografía es mucho más que simplemente presionar un botón. Es el arte de detener el tiempo, de congelar un instante que nunca volverá a repetirse exactamente de la misma manera. Como fotógrafo profesional, he dedicado mi vida a perfeccionar esta habilidad mágica de capturar lo efímero.</p>
-                
-                <h3>El Poder de un Solo Momento</h3>
-                <p>¿Alguna vez has visto una fotografía antigua y has sido transportado instantáneamente a ese momento? Las imágenes tienen este poder extraordinario de preservar emociones, atmósferas y esencias que de otra manera se perderían en el flujo constante del tiempo. Una sonrisa genuina, una lágrima que cae, el primer beso en una boda - estos momentos fugaces se convierten en tesoros eternos a través de la lente de una cámara.</p>
-                
-                <blockquote>
-                    "La fotografía es la única manera de detener el tiempo y jugar con él." - Henry Carroll
-                </blockquote>
-                
-                <h3>La Belleza en lo Cotidiano</h3>
-                <p>Lo extraordinario de la fotografía es que nos enseña a encontrar belleza en lo aparentemente ordinario. La manera en que la luz de la tarde baña un rostro, las sombras que crea el sol a través de las hojas de un árbol, o incluso las arrugas que cuentan la historia de una vida bien vivida. Como fotógrafo, mi misión es ayudar a las personas a ver el mundo a través de esta lente de apreciación estética.</p>
-                
-                <div class="article-image">
-                    <img src="https://images.unsplash.com/photo-1526666923127-b2970f64b422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Detalles fotográficos" loading="lazy">
-                </div>
-                
-                <h3>La Importancia de la Calidad</h3>
-                <p>En la era de los smartphones, donde todos llevamos una cámara en el bolsillo, ¿por qué sigue siendo importante la fotografía profesional? La respuesta está en la intención, la técnica y la calidad. Una fotografía profesional no solo captura un momento, sino que lo eleva a obra de arte. El cuidado en la composición, el dominio de la luz y la atención a los detalles hacen que estas imágenes trasciendan el tiempo.</p>
-                
-                <p>Cuando inviertes en fotografía profesional, no estás pagando solo por una imagen. Estás pagando por:</p>
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;">Años de experiencia y entrenamiento técnico</li>
-                    <li style="margin-bottom: 10px;">Equipo profesional que captura cada detalle</li>
-                    <li style="margin-bottom: 10px;">Edición cuidadosa que realza la belleza natural</li>
-                    <li style="margin-bottom: 10px;">Una perspectiva artística única</li>
-                    <li>La capacidad de contar tu historia de la manera más auténtica y hermosa posible</li>
-                </ul>
-                
-                <h3>Fotografía como Legado</h3>
-                <p>Las fotografías se convierten en herencia familiar, en testigos silenciosos de nuestra existencia. Dentro de cincuenta años, esas imágenes seguirán contando historias, evocando emociones y conectando generaciones. Esta es la verdadera magia de la fotografía: su capacidad de trascender el momento presente y convertirse en un puente entre el pasado, el presente y el futuro.</p>
-                
-                <p>Como fotógrafo, considero un privilegio inmenso ser el encargado de crear estos tesoros visuales que perdurarán mucho más allá de nosotros. Cada click de mi cámara es un acto de amor por el arte y por la humanidad, un intento de capturar la esencia fugaz de la vida en toda su belleza y autenticidad.</p>
-                
-                <a href="#blog" class="back-to-blog">&larr; Volver al blog</a>
-            </div>
+    <section id="pricing" class="section">
+        <div class="section-title">
+            <h2>Paquetes y Precios</h2>
+            <p>Opciones adaptables a diferentes necesidades y presupuestos</p>
+            <div class="divider"></div>
         </div>
-    </div>
-
-    <!-- Blog Article 2 - Por Qué la Calidad en la Fotografía es Fundamental -->
-    <div id="blog-article-2" class="article-section" style="display: none;">
-        <div class="article-container">
-            <div class="article-header">
-                <span class="article-date">2 de Mayo, 2023</span>
-                <h1 class="article-title">Por Qué la Calidad en la Fotografía es Fundamental</h1>
-            </div>
-            
-            <div class="article-image">
-                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Calidad fotográfica" loading="lazy">
-            </div>
-            
-            <div class="article-content">
-                <p>En la era digital actual, donde cada teléfono inteligente tiene una cámara decente, muchas personas se preguntan por qué deberían invertir en fotografía profesional. La respuesta reside en un concepto fundamental: la calidad. La diferencia entre una foto cualquiera y una fotografía de calidad es comparable a la diferencia entre un boceto rápido y una pintura al óleo magistral.</p>
-                
-                <h3>La Calidad como Inversión Temporal</h3>
-                <p>Una fotografía de calidad no es simplemente una imagen nítida o bien expuesta. Es un documento visual que resistirá el paso del tiempo, tanto técnicamente como emocionalmente. Considera esto:</p>
-                
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;"><strong>Resolución y detalle:</strong> Una fotografía profesional captura información suficiente para permitir ampliaciones de calidad incluso años después.</li>
-                    <li style="margin-bottom: 10px;"><strong>Gestión del color:</strong> Los profesionales trabajan con perfiles de color precisos que garantizan fidelidad cromática.</li>
-                    <li style="margin-bottom: 10px;"><strong>Composición intencional:</strong> Cada elemento en el encuadre está cuidadosamente considerado para contar una historia.</li>
-                    <li style="margin-bottom: 10px;"><strong>Procesamiento profesional:</strong> El revelado digital se realiza con estándares que preservan la calidad original.</li>
-                </ul>
-                
-                <div class="article-image">
-                    <img src="https://images.unsplash.com/photo-1523730205978-59fd1b2965e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Detalle fotográfico profesional" loading="lazy">
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <h3>Sesión Básica</h3>
+                    <div class="pricing-price">$199 <span>/ sesión</span></div>
                 </div>
-                
-                <h3>La Psicología de la Calidad Visual</h3>
-                <p>Nuestro cerebro procesa las imágenes de alta calidad de manera diferente. Estudios en neuroestética han demostrado que las imágenes bien compuestas, con equilibrio tonal y armonía cromática activan áreas del cerebro asociadas con el placer estético. Esto explica por qué una fotografía profesional puede evocarnos emociones más intensas y memorables.</p>
-                
-                <blockquote>
-                    "La calidad nunca es un accidente; siempre es el resultado de un esfuerzo inteligente." - John Ruskin
-                </blockquote>
-                
-                <h3>El Costo Oculto de la Baja Calidad</h3>
-                <p>Muchos piensan que ahorran dinero usando fotos de menor calidad, pero el costo real puede ser mayor a largo plazo:</p>
-                
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;"><strong>Pérdida de oportunidades:</strong> Una imagen mediocre puede no comunicar adecuadamente tu mensaje o valor.</li>
-                    <li style="margin-bottom: 10px;"><strong>Desactualización técnica:</strong> Formatos y estándares evolucionan, y solo las imágenes de alta calidad pueden adaptarse.</li>
-                    <li style="margin-bottom: 10px;"><strong>Deterioro emocional:</strong> Con el tiempo, las fotos de baja calidad pierden su capacidad de evocación.</li>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 1 hora de sesión</li>
+                    <li><i class="fas fa-check"></i> 15 fotos editadas</li>
+                    <li><i class="fas fa-check"></i> 1 cambio de vestuario</li>
+                    <li><i class="fas fa-check"></i> Entrega digital</li>
+                    <li><i class="fas fa-check"></i> Tiempo de entrega: 1 semana</li>
                 </ul>
-                
-                <h3>La Calidad como Narrativa Visual</h3>
-                <p>Cada decisión técnica en fotografía profesional - desde la elección del objetivo hasta el tratamiento de la luz y el procesamiento final - está al servicio de contar una historia visual coherente y poderosa. La calidad no es un añadido, es el lenguaje mismo de la narrativa fotográfica.</p>
-                
-                <p>En mi trabajo, me obsesiono con cada detalle técnico no por perfeccionismo vacío, sino porque sé que estos elementos se combinan para crear imágenes que no solo se ven bien hoy, sino que conservarán su poder narrativo y emocional décadas después. Esa es la verdadera esencia de la calidad fotográfica.</p>
-                
-                <a href="#blog" class="back-to-blog">&larr; Volver al blog</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Blog Article 3 - Dominando la Luz -->
-    <div id="blog-article-3" class="article-section" style="display: none;">
-        <div class="article-container">
-            <div class="article-header">
-                <span class="article-date">18 de Abril, 2023</span>
-                <h1 class="article-title">Dominando la Luz: Técnicas Profesionales de Iluminación</h1>
-            </div>
-            
-            <div class="article-image">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Técnicas de iluminación" loading="lazy">
-            </div>
-            
-            <div class="article-content">
-                <p>La luz es para el fotógrafo lo que el pincel para el pintor: el instrumento fundamental de creación. Dominar la luz no consiste solo en saber dónde colocarla, sino en comprender su lenguaje, su comportamiento y cómo interactúa con las formas, texturas y emociones que queremos transmitir.</p>
-                
-                <h3>La Luz Natural: Nuestra Aliada Inconstante</h3>
-                <p>La luz del sol es la fuente más democrática de iluminación, pero también la más traicionera. Su calidad cambia constantemente: la suave luz dorada del amanecer, el contraste brutal del mediodía, los tonos cálidos del atardecer. Cada momento del día ofrece posibilidades creativas distintas:</p>
-                
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;"><strong>Hora dorada:</strong> Esos 30-60 minutos después del amanecer o antes del atardecer cuando el sol está bajo en el horizonte, produciendo una luz cálida y difusa que suaviza las texturas y crea sombras alargadas.</li>
-                    <li style="margin-bottom: 10px;"><strong>Hora azul:</strong> El período crepuscular cuando el sol está justo debajo del horizonte, llenando el ambiente con una luz fría y etérea ideal para retratos melancólicos o paisajes urbanos.</li>
-                    <li style="margin-bottom: 10px;"><strong>Luz de mediodía:</strong> Aunque muchos la evitan por sus sombras duras, puede ser excelente para fotografía de alto contraste o cuando se usa correctamente con reflectores y difusores.</li>
-                </ul>
-                
-                <div class="article-image">
-                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Luz natural en fotografía" loading="lazy">
+                <div class="pricing-card-footer">
+                    <a href="#contact" class="btn btn-secondary">Reservar Ahora</a>
                 </div>
-                
-                <h3>El Triángulo Fundamental: Luz Principal, de Relleno y de Acento</h3>
-                <p>En iluminación profesional, trabajamos con tres tipos de luz básicos que se complementan:</p>
-                
-                <blockquote>
-                    "Fotografiar es colocar la cabeza, el ojo y el corazón en un mismo eje." - Henri Cartier-Bresson
-                </blockquote>
-                
-                <p><strong>1. Luz principal (Key Light):</strong> Es la fuente dominante que define la dirección principal de la iluminación y establece el carácter de la imagen. En retratos, suele colocarse a 45 grados del sujeto y ligeramente por encima del nivel de los ojos.</p>
-                
-                <p><strong>2. Luz de relleno (Fill Light):</strong> Su función es suavizar las sombras creadas por la luz principal sin eliminarlas por completo. Una técnica profesional es usar un reflector plateado para un relleno más contrastado o dorado para un efecto más cálido. La proporción entre luz principal y de relleno (ratio de iluminación) determina el dramatismo de la imagen.</p>
-                
-                <p><strong>3. Luz de acento (Back Light/Rim Light):</strong> Colocada detrás del sujeto, crea un halo de luz que lo separa del fondo, añadiendo profundidad tridimensional. En exteriores, a menudo se aprovecha el sol como luz de acento.</p>
-                
-                <div class="article-image">
-                    <img src="https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Esquema de iluminación profesional" loading="lazy">
-                </div>
-                
-                <h3>Modificadores de Luz: Dar Forma a la Iluminación</h3>
-                <p>Los profesionales usamos diversos modificadores para esculpir la luz según nuestras necesidades:</p>
-                
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;"><strong>Softboxes:</strong> Crean una luz suave y direccional ideal para retratos.</li>
-                    <li style="margin-bottom: 10px;"><strong>Paraguas:</strong> Ofrecen una iluminación más envolvente y menos controlada.</li>
-                    <li style="margin-bottom: 10px;"><strong>Snoots y grids:</strong> Permiten dirigir la luz con precisión para efectos dramáticos.</li>
-                    <li style="margin-bottom: 10px;"><strong>Reflectores:</strong> Desde los blancos para un relleno suave hasta los plateados para un efecto más especular.</li>
-                </ul>
-                
-                <h3>La Luz como Elemento Narrativo</h3>
-                <p>Más allá de la técnica, la gran maestría en iluminación consiste en usarla para contar historias. La dirección, calidad y color de la luz pueden evocar emociones específicas:</p>
-                
-                <ul style="margin-bottom: 25px; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 10px;"><strong>Luz lateral:</strong> Acentúa texturas y crea dramatismo.</li>
-                    <li style="margin-bottom: 10px;"><strong>Luz frontal:</strong> Suaviza rasgos y da sensación de apertura.</li>
-                    <li style="margin-bottom: 10px;"><strong>Contraluz:</strong> Crea siluetas y ambiente misterioso.</li>
-                    <li style="margin-bottom: 10px;"><strong>Luz cenital:</strong> Produce sombras profundas bajo ojos y nariz, útil para retratos expresivos.</li>
-                </ul>
-                
-                <p>Dominar la luz es un viaje sin fin, donde cada sesión fotográfica es una nueva oportunidad para aprender y experimentar. La verdadera maestría no está en seguir reglas, sino en saber cuándo romperlas para servir a la visión creativa.</p>
-                
-                <a href="#blog" class="back-to-blog">&larr; Volver al blog</a>
             </div>
-        </div>
-    </div>
-
-    <!-- Acerca de -->
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <h2 class="section-title">Acerca de Mí</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Fotógrafo">
+            <div class="pricing-card popular">
+                <div class="pricing-card-header">
+                    <h3>Sesión Estándar</h3>
+                    <div class="pricing-price">$349 <span>/ sesión</span></div>
                 </div>
-                <div class="about-text">
-                    <h3>Mi Pasión por la Fotografía</h3>
-                    <p>Con más de 10 años de experiencia en el mundo de la fotografía, me especializo en capturar la esencia y emoción de cada momento. Mi enfoque artístico y atención al detalle me permiten crear imágenes que cuentan historias.</p>
-                    <p>Cada sesión es una oportunidad para explorar nuevas perspectivas y crear algo único. Trabajo con luz natural y estudio para lograr los mejores resultados adaptados a cada cliente.</p>
-                    <p>Mi objetivo es no solo tomar fotografías, sino crear arte que perdure en el tiempo y evoque emociones genuinas.</p>
-                    <a href="#contacto" class="btn">Contáctame</a>
-                    <a href="https://wa.me/50672027559?text=Hola%20Marlon,%20estoy%20interesado%20en%20tu%20trabajo%20fotográfico" class="whatsapp-btn" style="margin-left: 15px;">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 2 horas de sesión</li>
+                    <li><i class="fas fa-check"></i> 30 fotos editadas</li>
+                    <li><i class="fas fa-check"></i> 2-3 cambios de vestuario</li>
+                    <li><i class="fas fa-check"></i> 2 locaciones cercanas</li>
+                    <li><i class="fas fa-check"></i> Tiempo de entrega: 5 días</li>
+                </ul>
+                <div class="pricing-card-footer">
+                    <a href="#contact" class="btn btn-primary">Reservar Ahora</a>
+                </div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <h3>Sesión Premium</h3>
+                    <div class="pricing-price">$599 <span>/ sesión</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 4 horas de sesión</li>
+                    <li><i class="fas fa-check"></i> 50+ fotos editadas</li>
+                    <li><i class="fas fa-check"></i> Iluminación profesional</li>
+                    <li><i class="fas fa-check"></i> Múltiples locaciones</li>
+                    <li><i class="fas fa-check"></i> Tiempo de entrega: 3 días</li>
+                </ul>
+                <div class="pricing-card-footer">
+                    <a href="#contact" class="btn btn-secondary">Reservar Ahora</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="contact-section">
+    <section class="section">
+        <div class="section-title">
+            <h2>Mi Equipo</h2>
+            <p>Profesionales dedicados que hacen posible cada proyecto</p>
+            <div class="divider"></div>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright" loading="lazy">
+                </div>
+                <h3>Marlon Wright</h3>
+                <p>Fotógrafo Principal</p>
+                <p>Con 15 años de experiencia, Marlon lidera cada proyecto con creatividad y atención al detalle.</p>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Morales" loading="lazy">
+                </div>
+                <h3>Ana Morales</h3>
+                <p>Asistente de Fotografía</p>
+                <p>Especialista en iluminación y dirección artística, Ana asegura que cada sesión sea perfecta.</p>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Carlos Gómez" loading="lazy">
+                </div>
+                <h3>Carlos Gómez</h3>
+                <p>Editor Profesional</p>
+                <p>Con un ojo meticuloso para el detalle, Carlos da vida a cada imagen en postproducción.</p>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="https://randomuser.me/api/portraits/women/78.jpg" alt="Lucía Pérez" loading="lazy">
+                </div>
+                <h3>Lucía Pérez</h3>
+                <p>Coordinadora de Eventos</p>
+                <p>Lucía gestiona cada detalle logístico para que las sesiones sean fluidas y sin estrés.</p>
+                <div class="member-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="section">
+        <div class="section-title">
+            <h2>Blog Fotográfico</h2>
+            <p>Consejos, tutoriales y reflexiones sobre el arte de la fotografía</p>
+            <div class="divider"></div>
+        </div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de retrato" loading="lazy">
+                    <div class="blog-date">15 JUL 2025</div>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Retratos</span>
+                    <h3>El Arte de Capturar la Esencia Humana</h3>
+                    <p>Explora técnicas profesionales para crear retratos que revelen la personalidad y emociones de tus sujetos, más allá de una simple fotografía.</p>
+                    <div class="blog-author">
+                        <div class="author-image">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                        </div>
+                        <div class="author-details">
+                            <h4>Marlon Wright</h4>
+                            <p>Fotógrafo Profesional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de paisaje" loading="lazy">
+                    <div class="blog-date">10 JUL 2025</div>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Paisajes</span>
+                    <h3>Dominando la Fotografía de Amaneceres</h3>
+                    <p>Guía completa para capturar la magia de la hora dorada, desde configuración de cámara hasta técnicas de composición avanzadas.</p>
+                    <div class="blog-author">
+                        <div class="author-image">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                        </div>
+                        <div class="author-details">
+                            <h4>Marlon Wright</h4>
+                            <p>Fotógrafo Profesional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fotografía de boda" loading="lazy">
+                    <div class="blog-date">5 JUL 2025</div>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Bodas</span>
+                    <h3>10 Momentos Clave que Todo Fotógrafo de Bodas Debe Capturar</h3>
+                    <p>Descubre los momentos emocionales clave que hacen que los álbumes de bodas sean verdaderamente memorables y cómo anticiparte a ellos.</p>
+                    <div class="blog-author">
+                        <div class="author-image">
+                            <img src="https://i.ibb.co/kgk19Z4H/Beauty-Plus-20250620151227771-save.jpg" alt="Marlon Wright">
+                        </div>
+                        <div class="author-details">
+                            <h4>Marlon Wright</h4>
+                            <p>Fotógrafo Profesional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Suscríbete a Mi Newsletter</h2>
+        <p>Recibe consejos exclusivos, promociones especiales y actualizaciones sobre mis próximos talleres y proyectos.</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="newsletter-btn">Suscribirse</button>
+        </form>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="section-title">
+            <h2>Contacto</h2>
+            <p>¿Listo para crear algo increíble juntos? Ponte en contacto</p>
+            <div class="divider"></div>
+        </div>
         <div class="contact-container">
-            <h2 class="section-title">Contacto</h2>
-            <p style="margin-bottom: 40px; color: #ccc;">¿Listo para crear algo increíble juntos? Contáctame para discutir tu proyecto o para reservar una sesión.</p>
-            
-            <form class="contact-form" id="contactForm">
-                <input type="text" placeholder="Nombre" required>
-                <input type="email" placeholder="Email" required>
-                <input type="tel" placeholder="Teléfono (opcional)">
-                <textarea placeholder="Mensaje" required></textarea>
-                <button type="submit">Enviar Mensaje</button>
-            </form>
-            
-            <div class="social-links">
-                <h3>Sígueme</h3>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/marlonfotoscr?igsh=MXVub2Z1eWxlb3Jvaw==" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Flickr" target="_blank"><i class="fab fa-flickr"></i></a>
-                    <a href="#" aria-label="Pinterest" target="_blank"><i class="fab fa-pinterest"></i></a>
-                    <a href="#" aria-label="TikTok" target="_blank"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://wa.me/50672027559?text=Hola%20Marlon,%20estoy%20interesado%20en%20tu%20trabajo%20fotográfico" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Ubicación</h4>
+                        <p>San José, Costa Rica</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Correo Electrónico</h4>
+                        <a href="mailto:hola@marlonfotos.com">hola@marlonfotos.com</a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Teléfono</h4>
+                        <a href="tel:+50664380181">+506 6438 0181</a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Horario</h4>
+                        <p>Lunes a Viernes: 9am - 6pm<br>Sábados: 10am - 2pm</p>
+                    </div>
+                </div>
+                <div class="contact-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Asunto">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Enviar Mensaje</button>
+                </form>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.953!2d-84.081138!3d9.933123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e3b1c6b7b7d7%3A0x3c4b5b6c8b9c7d2!2sSan%20Jos%C3%A9%2C%20Costa%20Rica!5e0!3m2!1ses!2scr!4v1697041234567" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p class="footer-text">© 2023 MarlonFotos. Todos los derechos reservados.</p>
-        <a href="#inicio" class="back-to-top">Volver arriba</a>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>MarlonFotos</h3>
+                <p>Fotografía profesional que captura momentos y crea arte visual. Especializado en retratos, bodas, paisajes y fotografía comercial.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Fotografía de Retratos</a></li>
+                    <li><a href="#">Fotografía de Bodas</a></li>
+                    <li><a href="#">Fotografía de Paisajes</a></li>
+                    <li><a href="#">Fotografía Comercial</a></li>
+                    <li><a href="#">Fotografía de Eventos</a></li>
+                    <li><a href="#">Talleres de Fotografía</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Sobre Mí</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#portfolio">Portafolio</a></li>
+                    <li><a href="#testimonials">Testimonios</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li><a href="tel:+50664380181">+506 6438 0181</a></li>
+                    <li><a href="mailto:hola@marlonfotos.com">hola@marlonfotos.com</a></li>
+                    <li>San José, Costa Rica</li>
+                    <li>Lunes a Viernes: 9am - 6pm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 MarlonFotos. Todos los derechos reservados. Diseñado con <i class="fas fa-heart" style="color: var(--accent);"></i> por Marlon Wright</p>
+        </div>
     </footer>
 
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <span class="lightbox-close">&times;</span>
-            <img class="lightbox-img" src="" alt="">
-            <div class="lightbox-caption"></div>
-            <div class="lightbox-nav">
-                <button class="lightbox-prev">&#10094;</button>
-                <button class="lightbox-next">&#10095;</button>
+    <a href="https://wa.me/+50664380181" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="modal" id="imageModal">
+        <span class="modal-close">×</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Imagen ampliada">
+            <div class="modal-nav">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
             </div>
+            <div class="modal-thumbnails" id="modalThumbnails"></div>
         </div>
     </div>
 
-    <!-- Particles.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // Preloader
+        window.addEventListener('load', function() {
+            // Simulate loading progress
+            let progress = 0;
+            const progressBar = document.querySelector('.preloader-progress');
+            const interval = setInterval(function() {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                progressBar.style.width = progress + '%';
+            }, 100);
+
+            // Hide preloader when fully loaded
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: function() {
+                        preloader.style.display = 'none';
+                    }
+                });
+            }, 2000);
         });
 
-        // Gallery filter
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filters button');
-            const photoItems = document.querySelectorAll('.photo-item');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    const filterValue = this.getAttribute('data-filter');
-                    
-                    // Filter photos
-                    photoItems.forEach(item => {
-                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') ?
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
             });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Update URL without page reload
-                    history.pushState(null, null, targetId);
-                });
-            });
-
-            // Lightbox functionality
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.querySelector('.lightbox-img');
-            const lightboxCaption = document.querySelector('.lightbox-caption');
-            const lightboxClose = document.querySelector('.lightbox-close');
-            const lightboxPrev = document.querySelector('.lightbox-prev');
-            const lightboxNext = document.querySelector('.lightbox-next');
-            const galleryImages = document.querySelectorAll('.photo-item img');
-            
-            let currentImageIndex = 0;
-            const imagesArray = Array.from(galleryImages);
-            
-            // Open lightbox
-            galleryImages.forEach((img, index) => {
-                img.addEventListener('click', () => {
-                    currentImageIndex = index;
-                    updateLightbox();
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-            
-            // Close lightbox
-            lightboxClose.addEventListener('click', () => {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close when clicking outside image
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = 'auto';
                 }
-            });
-            
-            // Navigation
-            lightboxPrev.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
-                updateLightbox();
-            });
-            
-            lightboxNext.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
-                updateLightbox();
-            });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                
-                if (e.key === 'Escape') {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                } else if (e.key === 'ArrowLeft') {
-                    currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
-                    updateLightbox();
-                } else if (e.key === 'ArrowRight') {
-                    currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
-                    updateLightbox();
-                }
-            });
-            
-            function updateLightbox() {
-                const imgSrc = imagesArray[currentImageIndex].getAttribute('src');
-                const imgAlt = imagesArray[currentImageIndex].getAttribute('alt');
-                const photoTitle = imagesArray[currentImageIndex].parentElement.querySelector('.photo-title').textContent;
-                
-                lightboxImg.setAttribute('src', imgSrc);
-                lightboxImg.setAttribute('alt', imgAlt);
-                lightboxCaption.textContent = photoTitle;
-                
-                // Add animation
-                lightboxImg.style.animation = 'none';
-                setTimeout(() => {
-                    lightboxImg.style.animation = 'zoomIn 0.3s ease';
-                }, 10);
-            }
-
-            // Animated title
-            const title = "MarlonFotos";
-            const titleElement = document.getElementById('main-title');
-            
-            // Create letter spans
-            title.split('').forEach((letter, index) => {
-                const span = document.createElement('span');
-                span.className = 'letter';
-                span.textContent = letter;
-                
-                // Special treatment for capital F
-                if (letter === 'F') {
-                    span.classList.add('capital-f');
-                }
-                
-                // Set animation delay
-                span.style.animationDelay = `${index * 0.1}s`;
-                
-                titleElement.appendChild(span);
-            });
-            
-            // Add subtle glow after animation
-            setTimeout(() => {
-                document.querySelector('.title-wrapper').style.animation = 'subtleGlow 2s ease-in-out infinite alternate';
-            }, 1500);
-            
-            // Typewriter effect for subtitle
-            const subtitle = "Capturando momentos extraordinarios con arte y pasión";
-            const subtitleElement = document.querySelector('.subtitle-text');
-            
-            setTimeout(() => {
-                let i = 0;
-                const typeWriter = () => {
-                    if (i < subtitle.length) {
-                        subtitleElement.textContent = subtitle.substring(0, i+1);
-                        i++;
-                        setTimeout(typeWriter, 30 + Math.random() * 20);
-                    }
-                };
-                typeWriter();
-            }, 1800);
-            
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Gracias por tu mensaje. Me pondré en contacto contigo pronto.');
-                    this.reset();
-                });
-            }
-            
-            // Blog article navigation
-            const blogLinks = document.querySelectorAll('.read-more');
-            const blogArticles = document.querySelectorAll('.article-section');
-            
-            blogLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetArticle = this.getAttribute('href');
-                    
-                    // Hide all articles first
-                    blogArticles.forEach(article => {
-                        article.style.display = 'none';
-                    });
-                    
-                    // Show target article
-                    document.querySelector(targetArticle).style.display = 'block';
-                    
-                    // Scroll to article
-                    window.scrollTo({
-                        top: document.querySelector(targetArticle).offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Back to blog links
-            const backToBlogLinks = document.querySelectorAll('.back-to-blog');
-            
-            backToBlogLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Hide all articles
-                    blogArticles.forEach(article => {
-                        article.style.display = 'none';
-                    });
-                    
-                    // Scroll to blog section
-                    window.scrollTo({
-                        top: document.querySelector('#blog').offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Initialize particles.js
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": false,
-                        "anim": {
-                            "enable": false,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": false,
-                            "speed": 40,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#ffffff",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
             });
         });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Image Modal
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalThumbnails = document.getElementById('modalThumbnails');
+        const closeBtn = document.querySelector('.modal-close');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const viewButtons = document.querySelectorAll('.view-image');
+
+        let currentIndex = 0;
+        let images = [];
+        let currentCategory = 'all';
+
+        // Initialize modal with all portfolio images
+        portfolioItems.forEach((item, index) => {
+            const imgSrc = item.querySelector('img').src;
+            images.push({
+                src: imgSrc,
+                category: item.getAttribute('data-category')
+            });
+
+            viewButtons[index].addEventListener('click', function(e) {
+                e.preventDefault();
+                currentIndex = index;
+                currentCategory = portfolioItems[index].getAttribute('data-category');
+                openModal();
+            });
+        });
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateModalImage();
+            updateThumbnails();
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalImage() {
+            modalImg.src = images[currentIndex].src;
+        }
+
+        function updateThumbnails() {
+            modalThumbnails.innerHTML = '';
+
+            // Filter images by current category
+            const filteredImages = images.filter(img =>
+                currentCategory === 'all' || img.category === currentCategory
+            );
+
+            filteredImages.forEach((img, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'modal-thumbnail';
+                if (images[currentIndex].src === img.src) {
+                    thumb.classList.add('active');
+                }
+
+                thumb.innerHTML = `<img src="${img.src}" alt="Thumbnail ${index + 1}">`;
+
+                thumb.addEventListener('click', function() {
+                    // Find the original index of this image
+                    const originalIndex = images.findIndex(i => i.src === img.src);
+                    currentIndex = originalIndex;
+                    updateModalImage();
+                    updateThumbnails();
+                });
+
+                modalThumbnails.appendChild(thumb);
+            });
+        }
+
+        function navigateModal(direction) {
+            // Filter images by current category
+            const filteredImages = images.filter(img =>
+                currentCategory === 'all' || img.category === currentCategory
+            );
+
+            // Find current index in filtered array
+            const filteredIndex = filteredImages.findIndex(img =>
+                img.src === images[currentIndex].src
+            );
+
+            let newFilteredIndex;
+            if (direction === 'prev') {
+                newFilteredIndex = (filteredIndex - 1 + filteredImages.length) % filteredImages.length;
+            } else {
+                newFilteredIndex = (filteredIndex + 1) % filteredImages.length;
+            }
+
+            // Find original index of the new image
+            const newImageSrc = filteredImages[newFilteredIndex].src;
+            currentIndex = images.findIndex(img => img.src === newImageSrc);
+
+            updateModalImage();
+            updateThumbnails();
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        prevBtn.addEventListener('click', () => navigateModal('prev'));
+        nextBtn.addEventListener('click', () => navigateModal('next'));
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Testimonials Slider
+        $('.testimonials-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: false,
+            adaptiveHeight: true
+        });
+
+        // Particle Effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // Random size
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+
+                // Random delay
+                const delay = Math.random() * 5;
+                particle.style.animationDelay = `${delay}s`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        gsap.from(".hero h1", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        gsap.from(".hero p", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            ease: "power3.out",
+            delay: 0.8
+        });
+
+        gsap.from(".hero-buttons", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            ease: "power3.out",
+            delay: 1.1,
+            onComplete: function() {
+                gsap.to(".scroll-down", {
+                    opacity: 1,
+                    duration: 0.5
+                });
+            }
+        });
+
+        // Section Title Animations
+        gsap.utils.toArray(".section-title h2").forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: title,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+
+        gsap.utils.toArray(".section-title p").forEach(text => {
+            gsap.from(text, {
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.2
+            });
+        });
+
+        gsap.utils.toArray(".section-title .divider").forEach(divider => {
+            gsap.from(divider, {
+                scrollTrigger: {
+                    trigger: divider,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                scaleX: 0,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.4
+            });
+        });
+
+        // About Section Animation
+        gsap.from(".about-image", {
+            scrollTrigger: {
+                trigger: ".about-content",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: -100,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        gsap.from(".about-text", {
+            scrollTrigger: {
+                trigger: ".about-content",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: 100,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Service Cards Animation
+        gsap.utils.toArray(".service-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i * 0.1
+            });
+        });
+
+        // Portfolio Items Animation
+        gsap.utils.toArray(".portfolio-item").forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i % 3 * 0.1
+            });
+        });
+
+        // Testimonials Animation
+        gsap.from(".testimonials-slider", {
+            scrollTrigger: {
+                trigger: ".testimonials-slider",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Pricing Cards Animation
+        gsap.utils.toArray(".pricing-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i * 0.1
+            });
+        });
+
+        // Team Members Animation
+        gsap.utils.toArray(".team-member").forEach((member, i) => {
+            gsap.from(member, {
+                scrollTrigger: {
+                    trigger: member,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i * 0.1
+            });
+        });
+
+        // Blog Cards Animation
+        gsap.utils.toArray(".blog-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: i % 3 * 0.1
+            });
+        });
+
+        // Contact Section Animation
+        gsap.from(".contact-info", {
+            scrollTrigger: {
+                trigger: ".contact-container",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: -100,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        gsap.from(".contact-form", {
+            scrollTrigger: {
+                trigger: ".contact-container",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: 100,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Footer Animation
+        gsap.from(".footer-container", {
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Parallax Effects
+        gsap.to(".hero-content", {
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            y: 100,
+            ease: "none"
+        });
+
+        // Floating Elements Animation
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach(el => {
+            gsap.to(el, {
+                y: 20,
+                duration: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        });
+
+        // Pulse Elements Animation
+        const pulseElements = document.querySelectorAll('.pulse');
+        pulseElements.forEach(el => {
+            gsap.to(el, {
+                scale: 1.1,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the form data to a server
+                alert('Gracias por tu mensaje. Me pondré en contacto contigo pronto.');
+                contactForm.reset();
+            });
+        }
+
+        // Newsletter Form Submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                alert(`Gracias por suscribirte con el correo: ${emailInput.value}`);
+                emailInput.value = '';
+            });
+        }
+
+        // Create particles on load
+        window.addEventListener('load', createParticles);
     </script>
 </body>
 </html>
