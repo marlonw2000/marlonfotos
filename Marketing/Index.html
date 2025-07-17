@@ -1,1 +1,1290 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marlon Marketing | Soluciones Profesionales para Negocios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #e69008;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(37, 99, 235, 0.8)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-align: center;
+            padding: 40px 30px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .service-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            opacity: 0;
+            transform: rotateY(180deg);
+            transition: var(--transition);
+            backface-visibility: hidden;
+        }
+
+        .service-card:hover .service-back {
+            opacity: 1;
+            transform: rotateY(0);
+        }
+
+        .service-card:hover .service-icon,
+        .service-card:hover h3,
+        .service-card:hover p {
+            opacity: 0;
+        }
+
+        .service-back h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .service-back ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .service-back li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* SEO Animation */
+        .seo-animation {
+            margin: 40px auto;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+        }
+
+        .seo-results {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .result-card {
+            background: var(--light);
+            border-radius: 8px;
+            width: 180px;
+            padding: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--secondary);
+        }
+
+        .result-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--secondary);
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* About */
+        .about {
+            background-color: var(--light-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--light-gray);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            padding-left: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact .section-title h2::after {
+            background: var(--secondary);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            color: var(--secondary);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.9);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        /* Stats */
+        .stats {
+            background: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: var(--transition);
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Marlon Marketing</h1>
+            </div>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="https://marlonw2000.github.io/marlonfotos/"><i class="fas fa-camera"></i> Fotografía</a></li>
+                <li><a href="#" class="active">Marketing</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#stats">Resultados</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Impulsa Tu Negocio con Estrategias de Marketing Efectivas</h1>
+                <p>Soluciones profesionales de marketing digital diseñadas para hacer crecer tu negocio, aumentar tu visibilidad y maximizar tus conversiones.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-secondary">Solicitar Consulta</a>
+                    <a href="#services" class="btn btn-outline">Nuestros Servicios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="clientCounter">0</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="projectCounter">0</div>
+                    <div class="stat-label">Proyectos Completados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="growthCounter">0</div>
+                    <div class="stat-label">Crecimiento Promedio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="roiCounter">0</div>
+                    <div class="stat-label">Retorno de Inversión</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios de Marketing</h2>
+                <p>Soluciones integrales para potenciar tu presencia en línea</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>SEO y Posicionamiento Web</h3>
+                    <p>Optimizamos tu sitio web para mejorar tu posicionamiento en buscadores y atraer tráfico cualificado de manera orgánica.</p>
+                    <div class="service-back">
+                        <h4>SEO Avanzado</h4>
+                        <ul>
+                            <li>Investigación de palabras clave</li>
+                            <li>Optimización On-Page</li>
+                            <li>Construcción de enlaces</li>
+                            <li>Análisis de competencia</li>
+                            <li>Reportes mensuales</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3>Marketing en Redes Sociales</h3>
+                    <p>Gestionamos tus redes sociales con estrategias personalizadas para aumentar tu engagement y generar leads.</p>
+                    <div class="service-back">
+                        <h4>Redes Sociales</h4>
+                        <ul>
+                            <li>Estrategia de contenidos</li>
+                            <li>Gestión de comunidades</li>
+                            <li>Campañas publicitarias</li>
+                            <li>Influencer marketing</li>
+                            <li>Análisis de resultados</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Email Marketing</h3>
+                    <p>Creamos campañas de email efectivas que fidelizan a tus clientes y aumentan tus conversiones.</p>
+                    <div class="service-back">
+                        <h4>Email Marketing</h4>
+                        <ul>
+                            <li>Diseño de newsletters</li>
+                            <li>Automatización de flujos</li>
+                            <li>Segmentación de audiencia</li>
+                            <li>Pruebas A/B</li>
+                            <li>Análisis de rendimiento</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3>Publicidad Digital</h3>
+                    <p>Desarrollamos campañas publicitarias en Google, Facebook e Instagram para maximizar tu ROI.</p>
+                    <div class="service-back">
+                        <h4>Publicidad Digital</h4>
+                        <ul>
+                            <li>Google Ads</li>
+                            <li>Facebook Ads</li>
+                            <li>Instagram Ads</li>
+                            <li>LinkedIn Ads</li>
+                            <li>Optimización continua</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>Creación de Contenido</h3>
+                    <p>Producimos contenido de valor que posiciona tu marca como referente en tu sector.</p>
+                    <div class="service-back">
+                        <h4>Creación de Contenido</h4>
+                        <ul>
+                            <li>Blog posts</li>
+                            <li>Artículos especializados</li>
+                            <li>Guías y ebooks</li>
+                            <li>Infografías</li>
+                            <li>Vídeos promocionales</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-analytics"></i>
+                    </div>
+                    <h3>Análisis y Reportes</h3>
+                    <p>Monitoreamos tus métricas clave y te proporcionamos informes detallados para medir el éxito de tus campañas.</p>
+                    <div class="service-back">
+                        <h4>Análisis de Datos</h4>
+                        <ul>
+                            <li>Google Analytics</li>
+                            <li>Dashboards personalizados</li>
+                            <li>Análisis de conversiones</li>
+                            <li>Optimización CRO</li>
+                            <li>Recomendaciones estratégicas</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Demo Section -->
+    <section class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Potenciamos tu Visibilidad con SEO</h2>
+                <p>Demostración de cómo mejoramos tu posicionamiento en buscadores</p>
+            </div>
+            <div class="seo-animation">
+                <div class="search-bar">
+                    <input type="text" id="seo-search" placeholder="Buscar servicios de marketing...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="seo-results">
+                    <div class="result-card">
+                        <h4>Posición Actual</h4>
+                        <div class="progress-bar">
+                            <div class="progress" id="current-progress"></div>
+                        </div>
+                        <p id="current-position">Página 3</p>
+                    </div>
+                    <div class="result-card">
+                        <h4>Después de 1 Mes</h4>
+                        <div class="progress-bar">
+                            <div class="progress" id="month1-progress"></div>
+                        </div>
+                        <p id="month1-position">Página 2</p>
+                    </div>
+                    <div class="result-card">
+                        <h4>Después de 3 Meses</h4>
+                        <div class="progress-bar">
+                            <div class="progress" id="month3-progress"></div>
+                        </div>
+                        <p id="month3-position">Página 1</p>
+                    </div>
+                    <div class="result-card">
+                        <h4>Posición Óptima</h4>
+                        <div class="progress-bar">
+                            <div class="progress" id="optimal-progress"></div>
+                        </div>
+                        <p id="optimal-position">Top 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Transformando Negocios con Estrategias Digitales</h2>
+                    <p>En Marlon Marketing, nos especializamos en ayudar a empresas y profesionales a alcanzar sus objetivos comerciales a través de estrategias de marketing digital efectivas y personalizadas.</p>
+                    <p>Con más de 8 años de experiencia en el sector, nuestro equipo combina creatividad, análisis de datos y conocimiento técnico para ofrecer soluciones que realmente generan resultados.</p>
+                    <p>Nuestra filosofía se basa en entender profundamente cada negocio, sus desafíos y oportunidades, para desarrollar estrategias que impulsen el crecimiento sostenible a largo plazo.</p>
+                    <a href="#" class="btn">Conoce Nuestra Historia</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Equipo de Marlon Marketing">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo Que Dicen Nuestros Clientes</h2>
+                <p>Historias de éxito de empresas que han crecido con nosotros</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">"Trabajar con Marlon Marketing ha sido un punto de inflexión para nuestro negocio. En solo 6 meses, nuestro tráfico orgánico aumentó en un 220% y nuestras ventas online se triplicaron. Su enfoque estratégico y atención al detalle son excepcionales."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Cliente Satisfecho">
+                            </div>
+                            <div class="author-info">
+                                <h4>Laura Martínez</h4>
+                                <p>Directora de Marketing, ModaExpress</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">"Como pequeño negocio local, no estábamos aprovechando el potencial del marketing digital. El equipo de Marlon Marketing desarrolló una estrategia integral que nos ha permitido competir con empresas más grandes. Ahora generamos leads constantemente y hemos expandido nuestra área de servicio."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente Satisfecho">
+                            </div>
+                            <div class="author-info">
+                                <h4>Carlos Rodríguez</h4>
+                                <p>Dueño, Delicias Gourmet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctanos</h2>
+                <p>Estamos listos para ayudarte a alcanzar tus objetivos</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Hablemos sobre tu proyecto</h3>
+                    <p>Completa el formulario o contáctanos directamente para una consulta gratuita y sin compromiso.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p>San José, Costa Rica</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p>+506 6438 0181</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p>ventasnikoncr@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Empresa">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Cuéntanos sobre tu proyecto" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Marlon Marketing</h3>
+                    <p>Especialistas en estrategias de marketing digital que transforman negocios y generan resultados tangibles.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">SEO y Posicionamiento Web</a></li>
+                        <li><a href="#">Marketing en Redes Sociales</a></li>
+                        <li><a href="#">Publicidad Digital</a></li>
+                        <li><a href="#">Email Marketing</a></li>
+                        <li><a href="#">Creación de Contenido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://marlonw2000.github.io/marlonfotos/"><i class="fas fa-camera"></i> Fotografía</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Suscríbete</h3>
+                    <p>Recibe consejos de marketing y promociones exclusivas en tu correo.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Tu correo electrónico" style="width: 100%; padding: 12px; border-radius: 4px; border: none;">
+                        </div>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Marlon Marketing. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounter = (counter, target) => {
+            let count = 0;
+            const increment = target / speed;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCounter, 10);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            
+            updateCounter();
+        };
+
+        // Initialize counters when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('clientCounter'), 250);
+                    animateCounter(document.getElementById('projectCounter'), 480);
+                    animateCounter(document.getElementById('growthCounter'), 175);
+                    animateCounter(document.getElementById('roiCounter'), 320);
+                    
+                    // Animate SEO progress bars
+                    setTimeout(() => {
+                        document.getElementById('current-progress').style.width = '40%';
+                        document.getElementById('month1-progress').style.width = '60%';
+                        document.getElementById('month3-progress').style.width = '80%';
+                        document.getElementById('optimal-progress').style.width = '95%';
+                    }, 500);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('stats'));
+
+        // SEO Search Simulation
+        const searchBtn = document.getElementById('search-btn');
+        const seoSearch = document.getElementById('seo-search');
+        
+        searchBtn.addEventListener('click', () => {
+            if (seoSearch.value.trim() !== '') {
+                document.getElementById('current-position').textContent = 'Página 3';
+                document.getElementById('month1-position').textContent = 'Página 2';
+                document.getElementById('month3-position').textContent = 'Página 1';
+                document.getElementById('optimal-position').textContent = 'Top 3';
+            }
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+            contactForm.reset();
+        });
+
+        // Service Card Animation
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.animation = 'pulse 0.5s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.animation = '';
+            });
+        });
+    </script>
+</body>
+</html>
