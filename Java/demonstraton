@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive JS+HTML+CSS Playground</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .panel:hover {
+            transform: translateY(-10px);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-align: center;
+        }
+        
+        .interactive-area {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .result-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 120px;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .counter-display {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+        
+        .slider-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 25px;
+            -webkit-appearance: none;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #ffcc00;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .color-box {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: auto;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JS + HTML + CSS Integration</h1>
+            <p class="subtitle">This example demonstrates how JavaScript, HTML, and CSS can work together seamlessly in a single file to create interactive web experiences.</p>
+        </header>
+        
+        <div class="content">
+            <!-- Interactive Counter -->
+            <div class="panel">
+                <h2>Interactive Counter</h2>
+                <div class="interactive-area">
+                    <div class="counter-display" id="counter">0</div>
+                    <div class="controls">
+                        <button onclick="increment()">Increment +</button>
+                        <button onclick="decrement()">Decrement -</button>
+                        <button onclick="resetCounter()">Reset</button>
+                    </div>
+                </div>
+                <div class="code-block">
+                    &lt;button <span class="highlight">onclick="increment()"</span>&gt;Increment +&lt;/button&gt;<br>
+                    <br>
+                    <span class="highlight">function increment()</span> {<br>
+                    &nbsp;&nbsp;counter++;<br>
+                    &nbsp;&nbsp;document.getElementById('counter').textContent = counter;<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- Color Changer -->
+            <div class="panel">
+                <h2>Color Changer</h2>
+                <div class="interactive-area">
+                    <div class="color-box" id="colorBox"></div>
+                    <div class="controls">
+                        <button onclick="changeColor('linear-gradient(45deg, #ff416c, #ff4b2b)')">Red</button>
+                        <button onclick="changeColor('linear-gradient(45deg, #2193b0, #6dd5ed)')">Blue</button>
+                        <button onclick="changeColor('linear-gradient(45deg, #11998e, #38ef7d)')">Green</button>
+                    </div>
+                </div>
+                <div class="code-block">
+                    &lt;button <span class="highlight">onclick="changeColor('blue-gradient')"</span>&gt;Blue&lt;/button&gt;<br>
+                    <br>
+                    <span class="highlight">function changeColor(color)</span> {<br>
+                    &nbsp;&nbsp;document.getElementById('colorBox').style.background = color;<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- Slider Control -->
+            <div class="panel">
+                <h2>Slider Control</h2>
+                <div class="interactive-area">
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="myRange" oninput="updateSlider()">
+                    </div>
+                    <div class="result-box">
+                        <p>Current Value: <span id="sliderValue">50</span></p>
+                        <div id="sliderVisual" style="width: 50%; height: 20px; background: #ffcc00; border-radius: 10px; margin-top: 15px;"></div>
+                    </div>
+                </div>
+                <div class="code-block">
+                    &lt;input type="range" <span class="highlight">oninput="updateSlider()"</span> id="myRange"&gt;<br>
+                    <br>
+                    <span class="highlight">function updateSlider()</span> {<br>
+                    &nbsp;&nbsp;let value = document.getElementById('myRange').value;<br>
+                    &nbsp;&nbsp;document.getElementById('sliderValue').textContent = value;<br>
+                    &nbsp;&nbsp;document.getElementById('sliderVisual').style.width = value + '%';<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>How It All Works Together</h2>
+            <div class="code-block">
+                <p><span class="highlight">HTML</span> provides the structure and content of the page</p>
+                <p><span class="highlight">CSS</span> controls the visual presentation and styling</p>
+                <p><span class="highlight">JavaScript</span> adds interactivity and dynamic behavior</p>
+            </div>
+            <div class="result-box">
+                <p>This entire application is contained in a single HTML file with:</p>
+                <ul style="text-align: left; margin-top: 10px;">
+                    <li>CSS styles in the &lt;style&gt; tag</li>
+                    <li>JavaScript code in the &lt;script&gt; tag</li>
+                    <li>HTML structure throughout the document</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Created to demonstrate HTML, CSS, and JavaScript integration | All in one file!</p>
+    </footer>
+
+    <script>
+        // Counter functionality
+        let counter = 0;
+        
+        function increment() {
+            counter++;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function decrement() {
+            if (counter > 0) counter--;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function resetCounter() {
+            counter = 0;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        // Color changer functionality
+        function changeColor(color) {
+            document.getElementById('colorBox').style.background = color;
+        }
+        
+        // Slider functionality
+        function updateSlider() {
+            const slider = document.getElementById('myRange');
+            const value = slider.value;
+            document.getElementById('sliderValue').textContent = value;
+            document.getElementById('sliderVisual').style.width = value + '%';
+            
+            // Change color based on value
+            const hue = (value / 100) * 120; // 0-120 (red to green)
+            document.getElementById('sliderVisual').style.background = `hsl(${hue}, 100%, 50%)`;
+        }
+        
+        // Initialize slider on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSlider();
+        });
+        
+        // Add animation to the color box on page load
+        setTimeout(() => {
+            document.getElementById('colorBox').style.transform = 'rotate(360deg)';
+            document.getElementById('colorBox').style.borderRadius = '50%';
+        }, 1000);
+    </script>
+</body>
+</html>
