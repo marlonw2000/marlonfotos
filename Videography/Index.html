@@ -1,1 +1,571 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marlon Films | Videografía Cinematográfica y Publicidad 8K</title>
+
+    <meta name="description" content="Productora audiovisual liderada por Marlon Wright, especializada en videografía cinematográfica, publicidad y videos musicales en calidad 8K. Contamos historias que impactan y elevan tu marca.">
+    <meta name="keywords" content="videografía 8k, cinematografía, publicidad, videos musicales, producción de video, Costa Rica, Marlon Wright, drone 8k, colorización davinci resolve, red komodo">
+    <meta name="author" content="Marlon Wright">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Paleta de Colores y Variables --- */
+        :root {
+            --dark-navy: #0a192f;
+            --navy: #112240;
+            --light-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --accent: #64ffda;
+            --accent-tint: rgba(100, 255, 218, 0.1);
+            --white: #e6f1ff;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* --- Estilos Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--dark-navy);
+            color: var(--slate);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 { color: var(--lightest-slate); font-weight: 700; margin-bottom: 1rem; }
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        section.visible { opacity: 1; transform: translateY(0); }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            font-family: var(--font-mono);
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            color: var(--lightest-slate);
+        }
+        .section-title::after {
+            content: ''; display: block; position: relative;
+            top: 2px; width: 300px; height: 1px; background-color: var(--light-navy);
+        }
+        .btn {
+            display: inline-block; padding: 1rem 1.75rem; background-color: transparent;
+            color: var(--accent); border: 1px solid var(--accent); border-radius: 4px;
+            font-family: var(--font-mono); text-decoration: none; transition: var(--transition);
+            cursor: pointer;
+        }
+        .btn:hover { background-color: var(--accent-tint); }
+
+        /* --- Header Principal (Portal) --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background-color: rgba(10, 25, 47, 0.85); backdrop-filter: blur(10px);
+            transition: var(--transition); box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .main-nav { display: flex; align-items: center; list-style: none; gap: 2.5rem; }
+        .main-nav a {
+            color: var(--light-slate); text-decoration: none; font-family: var(--font-sans);
+            font-weight: 600; letter-spacing: 0.5px; transition: var(--transition);
+        }
+        .main-nav a:hover { color: var(--accent); }
+        .main-nav a.active { color: var(--accent); font-weight: 700; }
+        .mobile-toggle { display: none; font-size: 2rem; color: var(--accent); cursor: pointer; }
+
+        /* --- Sub-Navegación Fija --- */
+        .sub-nav {
+            position: sticky;
+            top: 68px; /* Altura del header principal */
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 900;
+            padding: 1rem 0;
+            display: none; /* Se activa con JS */
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            box-shadow: 0 5px 20px rgba(2,12,27,0.5);
+        }
+        .sub-nav.visible { display: flex; }
+        .sub-nav a { color: var(--slate); text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem; transition: var(--transition); }
+        .sub-nav a:hover, .sub-nav a.active { color: var(--accent); }
+
+        /* --- Hero Section con Video de Fondo --- */
+        #hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        #video-bg {
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; z-index: -2; transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(10, 25, 47, 0.7); z-index: -1;
+        }
+        .hero-content h1 {
+            font-family: var(--font-sans); font-weight: 800;
+            font-size: clamp(3rem, 10vw, 7rem); margin: 0; color: var(--white);
+            letter-spacing: -2px;
+        }
+        .hero-content p {
+            font-family: var(--font-mono); color: var(--accent);
+            font-size: clamp(1rem, 4vw, 1.5rem); margin: 1rem 0 2rem;
+        }
+
+        /* --- Sección Sobre Mí --- */
+        #sobre-mi .about-container {
+            display: grid; grid-template-columns: 3fr 2fr; gap: 50px; align-items: flex-start;
+        }
+        #sobre-mi .about-text p { margin-bottom: 1rem; }
+        #sobre-mi .about-skills { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.9rem; }
+        #sobre-mi .about-skills li::before { content: '▹'; color: var(--accent); margin-right: 10px; }
+        #sobre-mi .about-image { position: relative; max-width: 300px; }
+        #sobre-mi .about-image img { width: 100%; border-radius: 4px; z-index: 1; position: relative; }
+        #sobre-mi .about-image::after {
+            content: ''; display: block; position: absolute; width: 100%; height: 100%;
+            border: 2px solid var(--accent); top: 20px; left: 20px;
+            border-radius: 4px; z-index: 0; transition: var(--transition);
+        }
+        #sobre-mi .about-image:hover::after { top: 15px; left: 15px; }
+        
+        /* --- Servicios --- */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .service-card { background-color: var(--light-navy); padding: 2rem; border-radius: 4px; transition: var(--transition); }
+        .service-card:hover { transform: translateY(-7px); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); }
+        .service-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .service-card ul { list-style: none; padding-left: 0; }
+        .service-card li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+        .service-card li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+
+        /* --- Portfolio --- */
+        .portfolio-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .portfolio-filters button { background: none; border: none; color: var(--slate); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem; transition: var(--transition); }
+        .portfolio-filters button.active, .portfolio-filters button:hover { color: var(--accent); background-color: var(--accent-tint); border-radius: 4px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .portfolio-item { position: relative; cursor: pointer; border-radius: 4px; overflow: hidden; background-color: var(--navy); }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: var(--transition); }
+        .portfolio-item:hover img { transform: scale(1.05); filter: brightness(0.7); }
+        .portfolio-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 25, 47, 0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: var(--transition); }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay h3 { margin: 0; font-size: 1.2rem; }
+        .portfolio-overlay p { color: var(--accent); font-family: var(--font-mono); font-size: 0.9rem; }
+        .modal { position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 25, 47, 0.9); display: none; align-items: center; justify-content: center; }
+        .modal-content { background-color: var(--light-navy); padding: 2rem; border-radius: 4px; max-width: 900px; width: 90%; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 1rem; right: 1.5rem; color: var(--lightest-slate); font-size: 2rem; cursor: pointer; transition: var(--transition); }
+        .modal-close:hover { color: var(--accent); }
+        .modal-video-placeholder { width: 100%; padding-top: 56.25%; background-color: #000; margin-bottom: 1.5rem; background-size: cover; background-position: center; }
+        .modal-body h2 { color: var(--accent); }
+
+        /* --- Testimonios --- */
+        .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .testimonial-card { background-color: var(--light-navy); padding: 2rem; border-radius: 4px; }
+        .testimonial-card .quote-icon { font-size: 2rem; color: var(--accent); }
+        .testimonial-card .text { font-style: italic; margin: 1rem 0; }
+        .testimonial-card .author { font-weight: 700; color: var(--lightest-slate); }
+        .testimonial-card .author-title { font-size: 0.9rem; font-family: var(--font-mono); }
+
+        /* --- CTA Block --- */
+        #cta-block {
+            padding: 80px 0;
+            background-image: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=60');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            text-align: center;
+        }
+        #cta-block h2 { font-size: 2.5rem; color: var(--white); }
+        #cta-block p { max-width: 600px; margin: 1rem auto 2rem; color: var(--light-slate); }
+
+        /* --- FAQ --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--light-navy); }
+        .faq-item summary {
+            padding: 1.5rem 0; font-size: 1.2rem; font-weight: 600;
+            color: var(--lightest-slate); cursor: pointer; list-style: none; /* Hide default arrow */
+            position: relative; padding-right: 2rem;
+        }
+        .faq-item summary::after { /* Custom arrow */
+            content: '›'; font-size: 2rem; color: var(--accent); position: absolute;
+            right: 0; top: 50%; transform: translateY(-50%) rotate(90deg); transition: transform 0.2s;
+        }
+        .faq-item[open] summary::after { transform: translateY(-50%) rotate(-90deg); }
+        .faq-item .answer { padding: 0 0 1.5rem; }
+
+        /* --- Contacto y Footer --- */
+        #contact { text-align: center; }
+        #contact .container { max-width: 700px; }
+        #contact h2 { font-size: clamp(2rem, 5vw, 2.5rem); }
+        footer { text-align: center; padding: 2rem 0; font-family: var(--font-mono); color: var(--slate); }
+        footer .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+        footer .social-links a { color: var(--slate); font-size: 1.5rem; transition: var(--transition); text-decoration: none; }
+        footer .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .header-container { padding: 1rem; }
+            .main-nav {
+                position: fixed; top: 0; right: -100%; width: 75%; min-width: 250px; height: 100vh;
+                background-color: var(--light-navy); flex-direction: column; justify-content: center;
+                gap: 2.5rem; transition: var(--transition); box-shadow: -10px 0px 30px -15px rgba(2,12,27,0.7);
+            }
+            .main-nav.active { right: 0; }
+            .mobile-toggle { display: block; z-index: 1001; }
+            .section-title::after { width: 100px; }
+            .sub-nav { display: none !important; } /* Ocultar sub-nav en móvil para simplicidad */
+            #sobre-mi .about-container, .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            #sobre-mi .about-image { margin: 0 auto 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="https://marlonw2000.github.io/marlonfotos/">INICIO</a></li>
+                    <li><a href="marketing.html">MARKETING</a></li>
+                    <li><a href="#" class="active">VIDEOGRAFÍA</a></li>
+                    <li><a href="desarrollo.html">DESARROLLO</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="sub-nav" id="page-sub-nav">
+        <a href="#sobre-mi">SOBRE MÍ</a>
+        <a href="#services">SERVICIOS</a>
+        <a href="#portfolio">PORTAFOLIO</a>
+        <a href="#equipment">EQUIPO</a>
+        <a href="#contact">CONTACTO</a>
+    </nav>
+
+    <main>
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <video autoplay muted loop playsinline id="video-bg">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-a-huge-canyon-with-a-river-in-it-31422-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-content container">
+                <h1>VISUAL STORYTELLING. REDEFINIDO.</h1>
+                <p>La fusión de tecnología 8K y arte cinematográfico para contar tu historia.</p>
+                <a href="#portfolio" class="btn">Explorar Proyectos</a>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="container">
+             <div class="about-container">
+                 <div class="about-text">
+                     <h2 class="section-title">Sobre Mí</h2>
+                     <p>¡Hola! Soy Marlon Wright, un videógrafo y director creativo con base en Costa Rica, obsesionado con la narrativa visual y la perfección técnica. Mi viaje comenzó no con una cámara, sino con una fascinación por cómo una secuencia de imágenes puede evocar emociones, cambiar percepciones y contar una historia completa sin decir una sola palabra.</p>
+                     <p>Mi misión es simple: crear piezas audiovisuales que no solo se vean espectaculares en una pantalla 8K, sino que también resuenen con la audiencia a un nivel más profundo. Combino la precisión del mejor equipo del mercado con una visión artística para transformar conceptos en realidades cinematográficas inolvidables.</p>
+                     <ul class="about-skills">
+                        <li>▹ Dirección Creativa</li>
+                        <li>▹ Guionización</li>
+                        <li>▹ Cinematografía 8K</li>
+                        <li>▹ Edición y Colorización</li>
+                        <li>▹ Operación de Drones FPV</li>
+                        <li>▹ Diseño de Sonido</li>
+                     </ul>
+                 </div>
+                 <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1560250056-07ba64664864?auto=format&fit=crop&w=600&q=80" alt="Marlon Wright, videógrafo">
+                 </div>
+             </div>
+        </section>
+
+        <section id="services" class="container" style="background-color: var(--navy); border-radius: 4px;">
+            <h2 class="section-title">Servicios de Producción</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-film"></i></div>
+                    <h3>Publicidad Cinematográfica</h3>
+                    <ul>
+                        <li>Desarrollo de concepto y guion</li>
+                        <li>Casting y dirección de actores</li>
+                        <li>Rodaje en locación o estudio</li>
+                        <li>Edición y colorización profesional</li>
+                        <li>Entrega optimizada para TV y redes</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-music"></i></div>
+                    <h3>Videos Musicales</h3>
+                     <ul>
+                        <li>Conceptualización visual y storyboard</li>
+                        <li>Dirección de arte y fotografía</li>
+                        <li>Grabación multi-cámara 8K</li>
+                        <li>Edición rítmica y VFX</li>
+                        <li>Masterización de color y sonido</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Videos Corporativos</h3>
+                     <ul>
+                        <li>Videos de marca (Brand films)</li>
+                        <li>Testimoniales y casos de éxito</li>
+                        <li>Cobertura de eventos y conferencias</li>
+                        <li>Videos de cultura empresarial</li>
+                        <li>Tours virtuales de instalaciones</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-helicopter"></i></div>
+                    <h3>Producción Aérea con Drones</h3>
+                     <ul>
+                        <li>Tomas panorámicas en 8K</li>
+                        <li>Seguimiento dinámico de sujetos</li>
+                        <li>Planos FPV (First Person View)</li>
+                        <li>Fotogrametría y mapeo 3D</li>
+                        <li>Inspecciones técnicas y de bienes raíces</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="portfolio" class="container">
+             <h2 class="section-title">Portafolio Destacado</h2>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <button class="filter-btn" data-filter="publicidad">Publicidad</button>
+                <button class="filter-btn" data-filter="musical">Musical</button>
+                <button class="filter-btn" data-filter="aereo">Aéreo</button>
+            </div>
+            <div class="portfolio-grid">
+                <a class="portfolio-item" data-category="publicidad" data-img="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=60" data-title="Campaña 'Origen' para Relojes 'Tempo'" data-desc="Comercial para el lanzamiento de una nueva línea de relojes de lujo, filmado en locaciones de Costa Rica. El enfoque fue el storytelling, conectando el producto con la naturaleza y la aventura.">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=60" alt="Reloj de lujo">
+                    <div class="portfolio-overlay"><h3>Relojes 'Tempo'</h3><p>Publicidad</p></div>
+                </a>
+                <a class="portfolio-item" data-category="musical" data-img="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=60" data-title="Video Musical 'Eco' de la Artista 'Luna'" data-desc="Video musical conceptual que explora temas de introspección y soledad. Se utilizó un juego de luces de neón y locaciones urbanas para crear una atmósfera única y melancólica.">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=60" alt="Video Musical">
+                    <div class="portfolio-overlay"><h3>Luna - 'Eco'</h3><p>Video Musical</p></div>
+                </a>
+                <a class="portfolio-item" data-category="aereo" data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60" data-title="Showreel Aéreo de Costa Rica" data-desc="Recopilación de las mejores tomas aéreas capturadas con drones 8K a lo largo de Costa Rica, mostrando la belleza de sus volcanes, playas y selvas.">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60" alt="Toma Aérea">
+                    <div class="portfolio-overlay"><h3>Costa Rica Aérea</h3><p>Drone / Aéreo</p></div>
+                </a>
+                <a class="portfolio-item" data-category="publicidad" data-img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=60" data-title="Campaña 'Sabor' para Restaurante 'Fusión'" data-desc="Serie de videos cortos para redes sociales mostrando el proceso artesanal y la pasión detrás de los platos del restaurante 'Fusión'. Filmado con lentes macro para capturar cada detalle.">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=60" alt="Comida gourmet">
+                    <div class="portfolio-overlay"><h3>Restaurante 'Fusión'</h3><p>Publicidad</p></div>
+                </a>
+                <a class="portfolio-item" data-category="publicidad" data-img="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=60" data-title="Campaña 'Sound' para Auriculares 'Aura'" data-desc="Comercial de producto enfocado en la experiencia inmersiva del sonido. Se usaron técnicas de diseño de sonido avanzado y tomas en cámara lenta para transmitir la sensación.">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=60" alt="Auriculares">
+                    <div class="portfolio-overlay"><h3>Auriculares 'Aura'</h3><p>Publicidad</p></div>
+                </a>
+                 <a class="portfolio-item" data-category="musical" data-img="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=60" data-title="Concierto en Vivo - Banda 'Nómada'" data-desc="Grabación multicámara de un concierto en vivo, capturando la energía de la banda y la reacción del público. Se realizó una mezcla de sonido en post-producción para una calidad de audio superior.">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=60" alt="Concierto en vivo">
+                    <div class="portfolio-overlay"><h3>Banda 'Nómada' - En Vivo</h3><p>Musical</p></div>
+                </a>
+            </div>
+        </section>
+
+        <section id="testimonios" class="container">
+            <h2 class="section-title">Lo que dicen los clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="text">"La visión cinematográfica de Marlon transformó por completo nuestra campaña. Pasamos de tener un buen producto a tener una historia que vende. La calidad 8K es simplemente de otro nivel."</p>
+                    <p class="author">Sofía Valerio</p>
+                    <p class="author-title">Directora de Marketing, Tempo Watches</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="text">"Trabajar con Marlon fue un proceso colaborativo y creativo. Entendió mi visión musical y la elevó con su dirección. El resultado final superó todas mis expectativas."</p>
+                    <p class="author">David Rojas (Luna)</p>
+                    <p class="author-title">Artista Musical</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipment" class="container" style="background-color: var(--navy); border-radius: 4px;">
+            <h2 class="section-title">Arsenal Técnico</h2>
+            <div class="equipment-grid">
+                <div class="equipment-card"><i class="fas fa-camera-retro"></i><h3>Cámaras</h3><p>RED V-Raptor 8K, Blackmagic Ursa Mini 12K</p></div>
+                <div class="equipment-card"><i class="fas fa-dot-circle"></i><h3>Lentes</h3><p>Cooke Anamorphic, Sigma Cine Primes</p></div>
+                <div class="equipment-card"><i class="fas fa-helicopter"></i><h3>Drones</h3><p>DJI Inspire 3 (8K), Custom FPV Quads</p></div>
+                <div class="equipment-card"><i class="fas fa-video"></i><h3>Estabilización</h3><p>DJI Ronin 4D, Trípodes Sachtler, Sliders</p></div>
+                <div class="equipment-card"><i class="fas fa-lightbulb"></i><h3>Iluminación</h3><p>Aputure LS 600d, Nanlite Pavotubes</p></div>
+                <div class="equipment-card"><i class="fas fa-microphone-alt"></i><h3>Sonido</h3><p>Sennheiser MKH 416, Sound Devices MixPre</p></div>
+            </div>
+        </section>
+
+        <section id="cta-block">
+            <h2>HAGAMOS QUE TU VISIÓN SEA INOLVIDABLE.</h2>
+            <p>Desde la primera idea hasta la entrega final en 8K, estoy aquí para transformar tu concepto en una pieza audiovisual que cautive, inspire y perdure.</p>
+            <a href="#contact" class="btn">Iniciar la Conversación</a>
+        </section>
+
+        <section id="faq" class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary>¿Cuál es el beneficio real de grabar en 8K?</summary>
+                    <div class="answer"><p>Grabar en 8K nos proporciona una calidad de imagen y un nivel de detalle sin precedentes. En post-producción, nos da una flexibilidad inmensa para reencuadrar, estabilizar y hacer zoom sin perder calidad, resultando en un producto final mucho más pulido, incluso si la entrega final es en 4K o 1080p. Además, prepara tu contenido para las futuras generaciones de pantallas.</p></div>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Trabajas solo o tienes un equipo?</summary>
+                    <div class="answer"><p>Depende de la escala del proyecto. Puedo operar como una unidad ágil de un solo hombre para proyectos más pequeños, pero para producciones más grandes, colaboro con una red de profesionales de confianza, incluyendo directores de fotografía, sonidistas, gaffers y asistentes de producción, para asegurar que cada aspecto del rodaje sea impecable.</p></div>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Cuál es el proceso para iniciar un proyecto?</summary>
+                    <div class="answer"><p>Todo comienza con una conversación. Contáctame a través del formulario de abajo con los detalles de tu idea. Programaremos una llamada o reunión para discutir tus objetivos, presupuesto y cronograma. A partir de ahí, desarrollaré una propuesta detallada y un presupuesto para tu aprobación. ¡El primer paso es simplemente decir hola!</p></div>
+                </details>
+                 <details class="faq-item">
+                    <summary>¿Ofreces servicios fuera de Costa Rica?</summary>
+                    <div class="answer"><p>¡Absolutamente! Aunque mi base está en Costa Rica, tengo experiencia en producciones internacionales y estoy disponible para viajar a cualquier parte del mundo. Los costos de logística y viaje se detallarían en el presupuesto del proyecto.</p></div>
+                </details>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2 class="section-title" style="justify-content: center; font-size: 1.5rem;">05. ¿Tienes un proyecto?</h2>
+            <h2>Construyamos algo increíble juntos</h2>
+            <p>Mi bandeja de entrada está siempre abierta para nuevas ideas y colaboraciones. Cuéntame sobre tu proyecto y te responderé a la brevedad para explorar cómo podemos hacerlo realidad.</p>
+            <a href="mailto:marlon.films@example.com" class="btn">Enviar un Correo</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" target="_blank" aria-label="Vimeo"><i class="fab fa-vimeo-v"></i></a>
+            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>Producido y diseñado por Marlon Wright. © 2025</p>
+    </footer>
+    
+    <div class="modal" id="portfolio-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <div id="modal-video" class="modal-video-placeholder"></div>
+            <div class="modal-body">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Menú Móvil ---
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        mobileToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times');
+        });
+        
+        // --- Lógica de la Sub-Navegación Fija ---
+        const subNav = document.getElementById('page-sub-nav');
+        const heroSection = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > heroSection.offsetHeight) {
+                subNav.classList.add('visible');
+            } else {
+                subNav.classList.remove('visible');
+            }
+        });
+
+        // --- Resaltado de Enlace Activo en Sub-Nav al hacer scroll ---
+        const sectionsForNav = document.querySelectorAll('main > section[id]');
+        const navLinks = document.querySelectorAll('.sub-nav a');
+        const observerOptions = { rootMargin: '-30% 0px -70% 0px' };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+        sectionsForNav.forEach(section => { sectionObserver.observe(section); });
+
+
+        // --- Filtro del Portafolio ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.getAttribute('data-filter');
+                portfolioItems.forEach(item => {
+                    item.style.display = 'none';
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    }
+                });
+            });
+        });
+
+        // --- Lógica del Modal (Lightbox) del Portafolio ---
+        const modal = document.getElementById('portfolio-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalVideo = document.getElementById('modal-video');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const title = item.getAttribute('data-title');
+                const desc = item.getAttribute('data-desc');
+                const img = item.getAttribute('data-img');
+                modalTitle.textContent = title;
+                modalDescription.textContent = desc;
+                modalVideo.style.backgroundImage = `url('${img}')`;
+                modal.style.display = 'flex';
+            });
+        });
+        const closeModal = () => { modal.style.display = 'none'; };
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        
+        // --- Animaciones de aparición de secciones al hacer scroll ---
+        const sections = document.querySelectorAll('section');
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => { fadeInObserver.observe(section); });
+    });
+    </script>
+</body>
+</html>
